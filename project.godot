@@ -8,6 +8,22 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "FSM",
+"language": "GDScript",
+"path": "res://Objects/FSM/FiniteStateMachine.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://Objects/FSM/StateObject.gd"
+} ]
+_global_script_class_icons={
+"FSM": "",
+"State": ""
+}
+
 [application]
 
 config/name="gmtk2024"
