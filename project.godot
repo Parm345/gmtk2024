@@ -32,7 +32,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GlobalVariables="*res://global_variables.gd"
+GV="*res://global_variables.gd"
 
 [display]
 
