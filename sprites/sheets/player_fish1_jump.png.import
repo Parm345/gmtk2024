@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/garbage_bin1.png-041c416b9aff5f00849fa4754932ae07.stex"
+path="res://.import/player_fish1_jump.png-d17bf5aa592c35491651f93cda3557d3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/sheets/garbage_bin1.png"
-dest_files=[ "res://.import/garbage_bin1.png-041c416b9aff5f00849fa4754932ae07.stex" ]
+source_file="res://sprites/sheets/player_fish1_jump.png"
+dest_files=[ "res://.import/player_fish1_jump.png-d17bf5aa592c35491651f93cda3557d3.stex" ]
 
 [params]
 

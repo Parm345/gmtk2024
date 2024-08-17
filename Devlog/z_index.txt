@@ -1,0 +1,14 @@
+100	menu/pause menu/settings
+99	GUI display and buttons
+
+60	garbage_front
+
+50	player fish
+49	npc fish
+
+40	garbage_back
+
+1	foreground decor
+0	water
+-1	background decor
+

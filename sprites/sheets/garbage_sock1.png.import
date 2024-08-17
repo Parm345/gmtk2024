@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/garbage_bin1.png-041c416b9aff5f00849fa4754932ae07.stex"
+path="res://.import/garbage_sock1.png-3875429ae5630c4b1e04a1a351533a66.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/sheets/garbage_bin1.png"
-dest_files=[ "res://.import/garbage_bin1.png-041c416b9aff5f00849fa4754932ae07.stex" ]
+source_file="res://sprites/sheets/garbage_sock1.png"
+dest_files=[ "res://.import/garbage_sock1.png-3875429ae5630c4b1e04a1a351533a66.stex" ]
 
 [params]
 
