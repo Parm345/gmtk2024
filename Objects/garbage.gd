@@ -1,5 +1,6 @@
-extends Node2D
 class_name Garbage
+extends Node2D
 
 export var weight:float = 1;
-export var num_occupier:int = 0;
+export var num_occupiers:int = 0;
+
