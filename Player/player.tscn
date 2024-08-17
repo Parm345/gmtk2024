@@ -1,12 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Objects/FSM/FiniteStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://Player/player.gd" type="Script" id=2]
+[ext_resource path="res://Player/Scripts/Idle.gd" type="Script" id=3]
+[ext_resource path="res://Player/Scripts/Swim.gd" type="Script" id=4]
+[ext_resource path="res://Player/Scripts/Burst.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20, 20 )
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -25,7 +28,11 @@ shape = SubResource( 1 )
 script = ExtResource( 1 )
 
 [node name="Idle" type="Node2D" parent="FSM"]
+script = ExtResource( 3 )
 
 [node name="Swim" type="Node2D" parent="FSM"]
+visible = false
+script = ExtResource( 4 )
 
 [node name="Burst" type="Node2D" parent="FSM"]
+script = ExtResource( 5 )
