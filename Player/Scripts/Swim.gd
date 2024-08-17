@@ -17,6 +17,10 @@ func inProcess(_delta):
 	pass
 
 func changeParentState():
+	if actor.velocity.length_squared() == 0:
+		return states.Idle
+	if actor.isBursting:
+		return states.Burst
 	return null
 
 func handleInput(event):

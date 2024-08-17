@@ -29,6 +29,7 @@ func _physics_process(delta):
 		var newState = curState.changeParentState()
 		if newState != null:
 			setState(newState)
+			print(newState)
 
 func _process(delta):
 	if curState != null:

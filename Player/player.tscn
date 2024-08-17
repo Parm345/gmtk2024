@@ -1,27 +1,24 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Objects/FSM/FiniteStateMachine.gd" type="Script" id=1]
 [ext_resource path="res://Player/player.gd" type="Script" id=2]
 [ext_resource path="res://Player/Scripts/Idle.gd" type="Script" id=3]
 [ext_resource path="res://Player/Scripts/Swim.gd" type="Script" id=4]
 [ext_resource path="res://Player/Scripts/Burst.gd" type="Script" id=5]
+[ext_resource path="res://icon.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20, 20 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-color = Color( 0.709804, 0, 1, 1 )
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.529412, 0.0941176, 0.619608, 1 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 20, 20 )
 shape = SubResource( 1 )
 
 [node name="FSM" type="Node2D" parent="."]
@@ -36,3 +33,13 @@ script = ExtResource( 4 )
 
 [node name="Burst" type="Node2D" parent="FSM"]
 script = ExtResource( 5 )
+
+[node name="BurstTimer" type="Timer" parent="FSM/Burst"]
+wait_time = 0.5
+one_shot = true
+
+[node name="BurstCoolDown" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="FSM/Burst/BurstTimer" to="FSM/Burst" method="_on_BurstTimer_timeout"]
+[connection signal="timeout" from="BurstCoolDown" to="." method="_on_BurstCoolDown_timeout"]
