@@ -8,7 +8,7 @@
 
 40	garbage_back
 
-1	foreground decor
+20	foreground decor
 0	water
--1	background decor
+-20	background decor
 
