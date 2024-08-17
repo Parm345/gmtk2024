@@ -23,7 +23,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var mouseDirection:Vector2 = get_viewport().get_mouse_position() - global_position
-	set_rotation(mouseDirection.angle())
+	set_rotation(mouseDirection.angle()) # make sure to fix whe bursting
 	
 	if mouseDirection.x > 0:
 		$Sprite.flip_v = false

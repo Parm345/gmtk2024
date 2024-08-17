@@ -28,7 +28,6 @@ script = ExtResource( 1 )
 script = ExtResource( 3 )
 
 [node name="Swim" type="Node2D" parent="FSM"]
-visible = false
 script = ExtResource( 4 )
 
 [node name="Burst" type="Node2D" parent="FSM"]
