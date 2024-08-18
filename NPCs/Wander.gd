@@ -1,15 +1,5 @@
-extends Node
-class_name State
+extends State
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-@onready var states = get_parent().states
-var actor = null
-
-# Called to set the actor of the script
-func setActor(_actor):
-	actor = _actor
 
 # Called when the actor (FSM controller parent) enters the state
 func enter():
@@ -28,8 +18,17 @@ func inProcess(_delta):
 	pass
 
 func changeParentState():
+	if actor.isPreyInRayCast and actor.isHungry:
+		return states.Hunt
+	if actor.isTargetReached:
+		return  states.Idle
+	if actor.isSchoolFound:
+		return states.FormSchool
 	return null
 
 func handleInput(event):
 	pass
 
+
+func _on_VisionCone_body_entered(body):
+	pass # Replace with function body.

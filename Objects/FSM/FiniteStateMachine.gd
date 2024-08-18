@@ -1,10 +1,12 @@
 extends Node
 class_name FSM
 
-onready var actor = get_parent() # the actor is the node you are giving the FSM to
+@onready var actor = get_parent() # the actor is the node you are giving the FSM to
 var states = {}
-var curState = null  setget setState
+var curState = null:  set = setState
 var prevState = null
+
+var overridingState = null
 
 func _ready():
 	for child in get_children():
@@ -22,6 +24,9 @@ func setState(newState):
 		prevState.exit()
 	curState.setActor(actor)
 	curState.enter()
+	
+func overrideState(newState):
+	overridingState = newState
 
 func _physics_process(delta):
 	if curState != null:
@@ -29,7 +34,9 @@ func _physics_process(delta):
 		var newState = curState.changeParentState()
 		if newState != null:
 			setState(newState)
-			print(newState)
+		if overridingState != null:
+			setState(overridingState)
+			overridingState = null
 
 func _process(delta):
 	if curState != null:

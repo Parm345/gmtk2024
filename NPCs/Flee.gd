@@ -1,19 +1,10 @@
-extends Node
-class_name State
+extends State
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-@onready var states = get_parent().states
-var actor = null
-
-# Called to set the actor of the script
-func setActor(_actor):
-	actor = _actor
+var predLevel:int = 0
 
 # Called when the actor (FSM controller parent) enters the state
 func enter():
-	pass
+	predLevel = actor.activePredator.getPredLevel()
 
 # Called when parent leaves the state, most likely not necessary 
 func exit():
@@ -28,8 +19,11 @@ func inProcess(_delta):
 	pass
 
 func changeParentState():
+	if not actor.isPredatorSpotted:
+		return states.Idle
+	if predLevel <= actor.predLevel and actor.isDamaged:
+		return states.FightBack
 	return null
 
 func handleInput(event):
 	pass
-
