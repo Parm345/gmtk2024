@@ -9,6 +9,9 @@ extends CharacterBody2D
 @export var ACCL = 50
 @export var BURST_FORCE = 1000
 @export var MAX_SPEED = 350
+@export var health = 12
+
+var isDead = false
 
 var isBurstEnabled = true
 var isBursting = false
@@ -68,3 +71,10 @@ func enableBurstCoolDown():
 
 func _on_BurstCoolDown_timeout():
 	isBurstEnabled = true
+
+func takeDamage(damageDealt):
+	health -= damageDealt
+	if health <= 0:
+		$FSM.overrideState($FSM.states.Death)
+		isDead = true
+		

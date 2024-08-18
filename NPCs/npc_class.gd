@@ -6,11 +6,18 @@ class_name NPC
 @export var PATH_TOLERANCE:int = 10
 @export var PREY_TRACK_LEN:int = 105
 @export var PRED_LEVEL:int = 10
-@export var health = 12
+@export var HUNGER_DAMAGE = 1
+@export var MAX_HEALTH = 12;
 @export var wanderLength = 40
 
+@onready var health = MAX_HEALTH: set = takeDamage
+
 var prey:Node2D
+var lure:Node2D
 var lastKnownPreyPos:Vector2 = Vector2()
+var lastKnownLurePos:Vector2 = Vector2()
+
+var isDead:bool = false
 
 var isTargetReached:bool = false
 
@@ -19,9 +26,11 @@ var isPreyInRayCast:bool = false
 var isPreyInVizCone:bool = false
 var hasPreyBeenSeen:bool = false
 
-var isHungry:bool = true
-var isHunting:bool = true
+var isHungry:bool = false
 var isChasingPrey:bool = false
+var isLured:bool = false
+
+var isPreyInBiteRange:bool = false
 
 func _ready() -> void:
 	$NavigationAgent2D.path_desired_distance = PATH_TOLERANCE
@@ -74,10 +83,12 @@ func pointPreySight() -> void:
 					return
 	isPreyInRayCast = false
 	
-func takeDmamge(damageDealt):
+func takeDamage(damageDealt):
 	health -= damageDealt
 	if health <= 0:
 		$FSM.overrideState($FSM.states.Death)
+		isDead = true
+		print("hurt")
 
 func _on_vision_cone_body_entered(body: Node2D) -> void:
 	if body.is_in_group("prey"):
@@ -86,3 +97,23 @@ func _on_vision_cone_body_entered(body: Node2D) -> void:
 			hasPreyBeenSeen = true
 			isPreyInVizCone = true
 			pointPreySight()
+
+func _on_hunger_timer_timeout() -> void:
+	takeDamage(HUNGER_DAMAGE)
+	if health <= MAX_HEALTH/2:
+		isHungry = true
+
+func _on_lure_vision_body_entered(body: Node2D) -> void:
+	if body.is_in_group("lure") and not isDead:
+		if body.LURE_LEVEL >= PRED_LEVEL - 2 and body.LURE_LEVEL <= PRED_LEVEL + 2 and body.isActiveLure:
+			isLured = true
+			lure = body
+			$FSM.overrideState($FSM.states.Lured)
+
+func _on_bite_box_body_entered(body: Node2D) -> void:
+	if body.is_in_group("prey") and not isDead and not isLured:
+		pass
+	if body.is_in_group("lure") and not isDead and isLured:
+		body.eatLure()
+		takeDamage(MAX_HEALTH)
+		

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://376hhjxnb2uc"]
+[gd_scene load_steps=6 format=3 uid="uid://376hhjxnb2uc"]
 
 [ext_resource type="PackedScene" uid="uid://bsr5kxks68jr5" path="res://Player/player.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://b3n48ij357g7v" path="res://NPCs/Predator.tscn" id="2_7sw0l"]
+[ext_resource type="PackedScene" uid="uid://g58o2rko20qb" path="res://Lures/lure.tscn" id="3_5un41"]
 
 [sub_resource type="NavigationPolygon" id="1"]
 vertices = PackedVector2Array(1, 0, 1028, 3, 1026, 604, -1, 597)
@@ -37,3 +38,7 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
 position = Vector2(-2, 324)
 shape = SubResource("RectangleShape2D_jau1a")
+
+[node name="Lure" parent="." instance=ExtResource("3_5un41")]
+position = Vector2(571, 159)
+LURE_LEVEL = 10
