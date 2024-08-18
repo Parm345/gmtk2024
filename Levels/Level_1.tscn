@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://376hhjxnb2uc"]
+[gd_scene load_steps=5 format=3 uid="uid://376hhjxnb2uc"]
 
-[ext_resource type="PackedScene" path="res://Player/player.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bsr5kxks68jr5" path="res://Player/player.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://b3n48ij357g7v" path="res://NPCs/Predator.tscn" id="2_7sw0l"]
 
 [sub_resource type="NavigationPolygon" id="1"]
 vertices = PackedVector2Array(1, 0, 1028, 3, 1026, 604, -1, 597)
@@ -8,9 +9,31 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(1, 0, 1028, 3, 1026, 604, -1, 597)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jau1a"]
+size = Vector2(24, 668)
+
 [node name="Level1" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1")]
+position = Vector2(213, 73)
 
 [node name="NavMesh" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("1")
+
+[node name="Predator" parent="." instance=ExtResource("2_7sw0l")]
+position = Vector2(359, 285)
+
+[node name="Area2D" type="StaticBody2D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-2, 324)
+shape = SubResource("RectangleShape2D_jau1a")
+
+[node name="Area2D2" type="StaticBody2D" parent="."]
+position = Vector2(1031, -6)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(-2, 324)
+shape = SubResource("RectangleShape2D_jau1a")
