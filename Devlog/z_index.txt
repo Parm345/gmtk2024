@@ -1,14 +1,29 @@
 100	menu/pause menu/settings
 99	GUI display and buttons
 
+80	foreground plant
+
 60	garbage_front
 
 50	player fish
 49	npc fish
 
+45	collidable decor
+
 40	garbage_back
 
-20	foreground decor
 0	water
--20	background decor
+
+-10	background plant
+
+-13	background pillar
+
+-17	background pipe-attached meter
+-18	background wall-attached pipe
+-19	background wall-attached plant
+-20	background wall
+
+-24	background back wall
+
+-90	sky
 
