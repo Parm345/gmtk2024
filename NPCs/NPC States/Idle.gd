@@ -5,7 +5,8 @@ var isIdling = true
 # Called when the actor (FSM controller parent) enters the state
 func enter():
 	actor.velocity = Vector2()
-	isIdling = false
+	$IdleTimeOut.start()
+	isIdling = true
 
 # Called when parent leaves the state, most likely not necessary 
 func exit():
@@ -20,7 +21,7 @@ func inProcess(_delta):
 	pass
 
 func changeParentState():
-	if !isIdling:
+	if not isIdling:
 		return states.Wander
 	return null
 

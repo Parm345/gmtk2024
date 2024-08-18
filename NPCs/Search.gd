@@ -1,9 +1,10 @@
 extends State
 
+var isTargetReached:bool = false
 
 # Called when the actor (FSM controller parent) enters the state
 func enter():
-	pass
+	actor.setMovementTarget(actor.lastKnownPreyPos)
 
 # Called when parent leaves the state, most likely not necessary 
 func exit():
@@ -14,13 +15,15 @@ func inPhysicsProcess(_delta):
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame. Run in FSM _process.
-func inProcess(_delta):
-	pass
+func inProcess(delta):
+	isTargetReached = actor.moveToTargetPosition(delta)
+	if isTargetReached:
+		actor.pointPreySight()
 
 func changeParentState():
-	if actor.isPreyInSight:
+	if actor.isPreyInRayCast:
 		return states.Hunt
-	if actor.isTargetReached and not actor.isPreyFound:
+	if isTargetReached and not actor.isPreyInRayCast:
 		return states.Idle
 	return null
 

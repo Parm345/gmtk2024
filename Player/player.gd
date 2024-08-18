@@ -4,6 +4,8 @@ extends CharacterBody2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+
+@export var SPECIES_NAME = "Player"
 @export var ACCL = 50
 @export var BURST_FORCE = 1000
 @export var MAX_SPEED = 350

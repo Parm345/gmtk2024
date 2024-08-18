@@ -1,17 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://b3n48ij357g7v"]
+[gd_scene load_steps=13 format=3 uid="uid://b3n48ij357g7v"]
 
 [ext_resource type="Texture2D" uid="uid://bh4v08ktcifve" path="res://icon.png" id="1"]
+[ext_resource type="Script" path="res://NPCs/npc_class.gd" id="1_fpnbm"]
 [ext_resource type="Script" path="res://Objects/FSM/FiniteStateMachine.gd" id="2"]
-[ext_resource type="Script" path="res://NPCs/Predator.gd" id="3"]
 [ext_resource type="Script" path="res://NPCs/NPC States/Idle.gd" id="4"]
 [ext_resource type="Script" path="res://NPCs/Wander.gd" id="5"]
 [ext_resource type="Script" path="res://NPCs/Search.gd" id="6"]
 [ext_resource type="Script" path="res://NPCs/Hunt.gd" id="7"]
 [ext_resource type="Script" path="res://NPCs/Lured.gd" id="8"]
-[ext_resource type="Script" path="res://NPCs/FormSchool.gd" id="9"]
-[ext_resource type="Script" path="res://NPCs/FollowLeader.gd" id="10"]
 [ext_resource type="Script" path="res://NPCs/Flee.gd" id="11"]
-[ext_resource type="Script" path="res://NPCs/FightBack.gd" id="12"]
 [ext_resource type="Script" path="res://NPCs/Death.gd" id="13"]
 
 [sub_resource type="RectangleShape2D" id="1"]
@@ -20,10 +17,8 @@ size = Vector2(38, 38)
 [sub_resource type="RectangleShape2D" id="2"]
 
 [node name="Predator" type="CharacterBody2D"]
-script = ExtResource("3")
-__meta__ = {
-"_edit_group_": true
-}
+script = ExtResource("1_fpnbm")
+wanderLength = 300
 
 [node name="Sprite" type="Sprite2D" parent="."]
 modulate = Color(0.94902, 0.027451, 0.027451, 1)
@@ -52,20 +47,11 @@ script = ExtResource("6")
 [node name="Hunt" type="Node2D" parent="FSM"]
 script = ExtResource("7")
 
-[node name="FormSchool" type="Node2D" parent="FSM"]
-script = ExtResource("9")
-
-[node name="FollowLeader" type="Node2D" parent="FSM"]
-script = ExtResource("10")
-
 [node name="Lured" type="Node2D" parent="FSM"]
 script = ExtResource("8")
 
 [node name="Flee" type="Node2D" parent="FSM"]
 script = ExtResource("11")
-
-[node name="FightBack" type="Node2D" parent="FSM"]
-script = ExtResource("12")
 
 [node name="Death" type="Node2D" parent="FSM"]
 script = ExtResource("13")
@@ -78,6 +64,22 @@ polygon = PackedVector2Array(0, 0, 64, 64, 96, 40, 96, -48, 64, -64)
 
 [node name="PreySight" type="RayCast2D" parent="."]
 
+[node name="FrontVision" type="RayCast2D" parent="."]
+position = Vector2(19, 19)
+target_position = Vector2(10, 0)
+
+[node name="FrontVision2" type="RayCast2D" parent="."]
+position = Vector2(19, -19)
+target_position = Vector2(10, 0)
+
+[node name="RearVision" type="RayCast2D" parent="."]
+position = Vector2(-19, -19)
+target_position = Vector2(-10, 0)
+
+[node name="RearVision2" type="RayCast2D" parent="."]
+position = Vector2(-19, 19)
+target_position = Vector2(-10, 0)
+
 [node name="WallCollision" type="Area2D" parent="."]
 monitorable = false
 
@@ -87,3 +89,4 @@ shape = SubResource("2")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [connection signal="timeout" from="FSM/Idle/IdleTimeOut" to="FSM/Idle" method="_on_IdleTimeOut_timeout"]
+[connection signal="body_entered" from="VisionCone" to="." method="_on_vision_cone_body_entered"]
