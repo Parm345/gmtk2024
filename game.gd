@@ -1,11 +1,15 @@
 extends Node2D
 
-onready var current_level:Node2D;
-onready var fader:AnimationPlayer = $AnimationPlayer;
+@onready var current_level:Node2D;
+@onready var fader:AnimationPlayer = $AnimationPlayer;
+
 
 signal level_changed;
 var levels = [];
 var next_level_index:int;
+
+# NPC navigation stuff
+var map
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,7 +20,7 @@ func _ready():
 
 #defer this until previous level has been freed
 func add_level(n):
-	var level:Node2D = levels[n].instance();
+	var level:Node2D = levels[n].instantiate();
 	add_child(level);
 	current_level = level;
 	
@@ -47,6 +51,10 @@ func change_level_faded(n):
 	fader.play("fade_in_black");
 	if current_level.has_node("BGM"):
 		current_level.get_node("BGM").fade_out();
+
+func setupNavServer():
+	pass
+
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "fade_in_black":
