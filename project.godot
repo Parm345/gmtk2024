@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://Objects/FSM/FiniteStateMachine.gd"
 }, {
 "base": "Node2D",
+"class": "FishScale",
+"language": "GDScript",
+"path": "res://Objects/fish_scale.gd"
+}, {
+"base": "Node2D",
 "class": "Garbage",
 "language": "GDScript",
 "path": "res://Objects/garbage.gd"
@@ -26,6 +31,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "FSM": "",
+"FishScale": "",
 "Garbage": "",
 "State": ""
 }
