@@ -1,2 +1,7 @@
 res://Levels/map.tscn
 res://Tilesets/main_tileset.tres
+res://game.gd
+res://Game.tscn
+res://Levels/Level_2.tscn
+res://Objects/FSM/FiniteStateMachine.gd
+res://Player/player.gd
