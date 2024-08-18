@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://g58o2rko20qb"]
+
+[ext_resource type="Script" path="res://Lures/lure.gd" id="1_8fcdb"]
+[ext_resource type="Texture2D" uid="uid://bh4v08ktcifve" path="res://icon.png" id="1_awiqb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_erhhj"]
+
+[node name="Lure" type="CharacterBody2D" groups=["lure"]]
+script = ExtResource("1_8fcdb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.291923, 0.688641, 0.566121, 1)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_awiqb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_erhhj")

@@ -2,7 +2,8 @@ extends State
 
 # Called when the actor (FSM controller parent) enters the state
 func enter():
-	pass
+	actor.get_node("AnimatedSprite2D").set_animation("death")
+	actor.get_node("AnimatedSprite2D").play()
 
 # Called when parent leaves the state, most likely not necessary 
 func exit():
@@ -21,3 +22,8 @@ func changeParentState():
 
 func handleInput(event):
 	pass
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if actor.get_node("AnimatedSprite2D").get_animation() == "death":
+		actor.queue_free()
