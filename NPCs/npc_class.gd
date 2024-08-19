@@ -103,7 +103,7 @@ func bitePrey():
 	prey.takeDamage(BITE_DAMAGE)
 
 func _on_vision_cone_body_entered(body: Node2D) -> void:
-	if body.is_in_group("prey"):
+	if body.is_in_group("prey") and PRED_LEVEL > 3: # pred level less than 3 is weaker than player fish
 		if body.SPECIES_NAME != SPECIES_NAME: # prevent canabilism
 			prey = body
 			hasPreyBeenSeen = true

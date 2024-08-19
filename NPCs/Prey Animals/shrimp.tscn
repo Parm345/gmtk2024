@@ -1,16 +1,53 @@
-[gd_scene load_steps=14 format=3 uid="uid://b3n48ij357g7v"]
+[gd_scene load_steps=20 format=3 uid="uid://ohk5kl102qx7"]
 
-[ext_resource type="Script" path="res://NPCs/npc_class.gd" id="1_fpnbm"]
-[ext_resource type="Script" path="res://Objects/FSM/FiniteStateMachine.gd" id="2"]
-[ext_resource type="Script" path="res://NPCs/NPC States/Idle.gd" id="4"]
-[ext_resource type="Script" path="res://NPCs/Wander.gd" id="5"]
-[ext_resource type="Script" path="res://NPCs/Search.gd" id="6"]
-[ext_resource type="Script" path="res://NPCs/Hunt.gd" id="7"]
-[ext_resource type="Script" path="res://NPCs/Lured.gd" id="8"]
-[ext_resource type="Script" path="res://NPCs/Flee.gd" id="11"]
-[ext_resource type="Script" path="res://NPCs/AttackState/Idle.gd" id="11_08bcs"]
-[ext_resource type="Script" path="res://NPCs/AttackState/Bite.gd" id="12_gvgtm"]
-[ext_resource type="Script" path="res://NPCs/Death.gd" id="13"]
+[ext_resource type="Script" path="res://NPCs/npc_class.gd" id="1_pjalo"]
+[ext_resource type="Script" path="res://Objects/FSM/FiniteStateMachine.gd" id="2_6rslr"]
+[ext_resource type="Texture2D" uid="uid://dfgalq66x8220" path="res://sprites/sheets/npc_shrimp_swim.png" id="2_wdw3f"]
+[ext_resource type="Script" path="res://NPCs/NPC States/Idle.gd" id="3_x6j04"]
+[ext_resource type="Script" path="res://NPCs/Wander.gd" id="4_4g0nq"]
+[ext_resource type="Script" path="res://NPCs/Search.gd" id="5_5hlgh"]
+[ext_resource type="Script" path="res://NPCs/Hunt.gd" id="6_gnb1w"]
+[ext_resource type="Script" path="res://NPCs/Lured.gd" id="7_qw6rd"]
+[ext_resource type="Script" path="res://NPCs/Flee.gd" id="8_kprxb"]
+[ext_resource type="Script" path="res://NPCs/Death.gd" id="9_4tomh"]
+[ext_resource type="Script" path="res://NPCs/AttackState/Idle.gd" id="10_p3r4n"]
+[ext_resource type="Script" path="res://NPCs/AttackState/Bite.gd" id="11_wmjtd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbrcu"]
+atlas = ExtResource("2_wdw3f")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ch0ic"]
+atlas = ExtResource("2_wdw3f")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xonjo"]
+atlas = ExtResource("2_wdw3f")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bujqe"]
+atlas = ExtResource("2_wdw3f")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5s2d0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qbrcu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ch0ic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xonjo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bujqe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(14, 13)
@@ -18,40 +55,45 @@ size = Vector2(14, 13)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yl8ir"]
 size = Vector2(5, 13)
 
-[node name="Predator" type="CharacterBody2D" groups=["npc_prey"]]
-script = ExtResource("1_fpnbm")
+[node name="Shrimp" type="CharacterBody2D" groups=["npc_prey"]]
+script = ExtResource("1_pjalo")
 wanderLength = 300
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5s2d0")
+frame_progress = 0.850535
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
 shape = SubResource("1")
 
 [node name="FSM" type="Node2D" parent="."]
-script = ExtResource("2")
+script = ExtResource("2_6rslr")
 
 [node name="Idle" type="Node2D" parent="FSM"]
-script = ExtResource("4")
+script = ExtResource("3_x6j04")
 
 [node name="IdleTimeOut" type="Timer" parent="FSM/Idle"]
 wait_time = 2.0
 one_shot = true
 
 [node name="Wander" type="Node2D" parent="FSM"]
-script = ExtResource("5")
+script = ExtResource("4_4g0nq")
 
 [node name="Search" type="Node2D" parent="FSM"]
-script = ExtResource("6")
+script = ExtResource("5_5hlgh")
 
 [node name="Hunt" type="Node2D" parent="FSM"]
-script = ExtResource("7")
+script = ExtResource("6_gnb1w")
 
 [node name="Lured" type="Node2D" parent="FSM"]
-script = ExtResource("8")
+script = ExtResource("7_qw6rd")
 
 [node name="Flee" type="Node2D" parent="FSM"]
-script = ExtResource("11")
+script = ExtResource("8_kprxb")
 
 [node name="Death" type="Node2D" parent="FSM"]
-script = ExtResource("13")
+script = ExtResource("9_4tomh")
 
 [node name="VisionCone" type="Area2D" parent="."]
 monitorable = false
@@ -70,19 +112,19 @@ polygon = PackedVector2Array(0, 0, -64, 128, 192, 144, 176, -144, -64, -112)
 [node name="PreySight" type="RayCast2D" parent="."]
 
 [node name="FrontVision" type="RayCast2D" parent="."]
-position = Vector2(19, 19)
+position = Vector2(6, 5.5)
 target_position = Vector2(10, 0)
 
 [node name="FrontVision2" type="RayCast2D" parent="."]
-position = Vector2(19, -19)
+position = Vector2(6, -6.5)
 target_position = Vector2(10, 0)
 
 [node name="RearVision" type="RayCast2D" parent="."]
-position = Vector2(-19, -19)
+position = Vector2(-6, -6.5)
 target_position = Vector2(-10, 0)
 
 [node name="RearVision2" type="RayCast2D" parent="."]
-position = Vector2(-19, 19)
+position = Vector2(-6, 5.5)
 target_position = Vector2(-10, 0)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -90,13 +132,13 @@ target_position = Vector2(-10, 0)
 [node name="HungerTimer" type="Timer" parent="."]
 
 [node name="AttackFSM" type="Node2D" parent="."]
-script = ExtResource("2")
+script = ExtResource("2_6rslr")
 
 [node name="Idle" type="Node2D" parent="AttackFSM"]
-script = ExtResource("11_08bcs")
+script = ExtResource("10_p3r4n")
 
 [node name="Bite" type="Node2D" parent="AttackFSM"]
-script = ExtResource("12_gvgtm")
+script = ExtResource("11_wmjtd")
 
 [node name="BiteTimer" type="Timer" parent="AttackFSM/Bite"]
 
@@ -106,9 +148,10 @@ metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BiteBox"]
-position = Vector2(28, 0)
+position = Vector2(9.5, -0.5)
 shape = SubResource("RectangleShape2D_yl8ir")
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="FSM/Death" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="FSM/Idle/IdleTimeOut" to="FSM/Idle" method="_on_IdleTimeOut_timeout"]
 [connection signal="body_entered" from="VisionCone" to="." method="_on_vision_cone_body_entered"]
 [connection signal="body_entered" from="LureVision" to="." method="_on_lure_vision_body_entered"]
