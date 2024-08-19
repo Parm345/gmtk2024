@@ -14,6 +14,9 @@ var current_level_index:int = 0;
 var current_level:Node2D;
 var paused:bool = false;
 
+var ost_bus_index:int;
+var sfx_bus_index:int;
+
 # NPC navigation stuff
 var nav_map
 
@@ -22,10 +25,20 @@ var nav_map
 @onready var sounds:Node2D = $Sounds;
 @onready var back_button:TextureButton = $"GUI/Buttons/HBoxContainer/Back";
 @onready var pause_button:TextureButton = $"GUI/Buttons/HBoxContainer/Pause";
+@onready var ost_slider:HSlider = $"GUI/PauseMenu/MarginContainer/VBoxContainer/HBoxContainer/OST";
+@onready var sfx_slider:HSlider = $"GUI/PauseMenu/MarginContainer/VBoxContainer/HBoxContainer2/SFX";
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#bus indices
+	ost_bus_index = AudioServer.get_bus_index("ost");
+	sfx_bus_index = AudioServer.get_bus_index("sfx");
+	
+	#init volume sliders (and volumes, via value_changed signal)
+	ost_slider.value = 0.8;
+	sfx_slider.value = 0.8
+	
 	#levels
 	for i in range(LEVEL_COUNT):
 		levels.append(load("res://Levels/Level_"+str(i)+".tscn"));
@@ -75,11 +88,11 @@ func _on_animation_player_animation_finished(anim_name):
 		fader.play("fade_out_fish");
 
 func play_sound(s:String):
-	var audio_player:AudioStreamPlayer2D = sounds.get_node(s);
+	var audio_player:AudioStreamPlayer = sounds.get_node(s);
 	audio_player.play();
 
 func set_volume(s:String, v_db:float):
-	var audio_player:AudioStreamPlayer2D = sounds.get_node(s);
+	var audio_player:AudioStreamPlayer = sounds.get_node(s);
 	audio_player.volume_db = v_db;
 
 func _input(event):
@@ -89,10 +102,12 @@ func _input(event):
 func toggle_pause_menu():
 	if paused:
 		pause_menu.hide();
-		get_tree().paused = false;
+		Engine.time_scale = 1;
+		#get_tree().paused = false;
 	else:
 		pause_menu.show();
-		get_tree().paused = true;
+		Engine.time_scale = 0;
+		#get_tree().paused = true;
 	
 	paused = !paused;
 
@@ -112,3 +127,9 @@ func _on_back_pressed():
 
 func _on_pause_pressed():
 	toggle_pause_menu();
+
+func _on_ost_value_changed(value):
+	AudioServer.set_bus_volume_db(ost_bus_index, linear_to_db(value));
+	
+func _on_sfx_value_changed(value):
+	AudioServer.set_bus_volume_db(sfx_bus_index, linear_to_db(value));

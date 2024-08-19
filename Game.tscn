@@ -130,6 +130,44 @@ custom_minimum_size = Vector2(320, 40)
 layout_mode = 2
 text = "Quit"
 
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GUI/PauseMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Music"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OST" type="HSlider" parent="GUI/PauseMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.001
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GUI/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GUI/PauseMenu/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Effects"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SFX" type="HSlider" parent="GUI/PauseMenu/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.001
+
 [node name="Buttons" type="MarginContainer" parent="GUI"]
 anchors_preset = 1
 anchor_left = 1.0
@@ -171,12 +209,15 @@ stretch_mode = 4
 
 [node name="Sounds" type="Node2D" parent="."]
 
-[node name="waves" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="waves" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("2_2ndbh")
+bus = &"sfx"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="GUI/PauseMenu/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="GUI/PauseMenu/MarginContainer/VBoxContainer/Home" to="." method="_on_home_pressed"]
 [connection signal="pressed" from="GUI/PauseMenu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="value_changed" from="GUI/PauseMenu/MarginContainer/VBoxContainer/HBoxContainer/OST" to="." method="_on_ost_value_changed"]
+[connection signal="value_changed" from="GUI/PauseMenu/MarginContainer/VBoxContainer/HBoxContainer2/SFX" to="." method="_on_sfx_value_changed"]
 [connection signal="pressed" from="GUI/Buttons/HBoxContainer/Pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="GUI/Buttons/HBoxContainer/Back" to="." method="_on_back_pressed"]
