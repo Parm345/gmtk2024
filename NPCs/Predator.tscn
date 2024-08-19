@@ -19,7 +19,7 @@
 size = Vector2(38, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yl8ir"]
-size = Vector2(21, 38)
+size = Vector2(18, 38)
 
 [node name="Predator" type="CharacterBody2D" groups=["npc_prey"]]
 script = ExtResource("1_fpnbm")
@@ -114,12 +114,11 @@ script = ExtResource("12_gvgtm")
 [node name="BiteTimer" type="Timer" parent="AttackFSM/Bite"]
 
 [node name="BiteBox" type="Area2D" parent="."]
-position = Vector2(32, 0)
 collision_mask = 3
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BiteBox"]
-position = Vector2(-1.5, 0)
+position = Vector2(28, 0)
 shape = SubResource("RectangleShape2D_yl8ir")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="FSM/Death" method="_on_animated_sprite_2d_animation_finished"]

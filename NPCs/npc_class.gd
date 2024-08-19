@@ -62,9 +62,15 @@ func moveToTargetPosition(delta:float) -> bool:
 	velocity = velocityVector
 	
 	if velocity.x > 0:
+		$AnimatedSprite2D.flip_h = false
 		$VisionCone.scale.x = 1
+		$LureVision.scale.x = 1
+		$BiteBox.scale.x = 1
 	else:
+		$AnimatedSprite2D.flip_h = true
 		$VisionCone.scale.x = -1
+		$LureVision.scale.x = -1
+		$BiteBox.scale.x = -1
 	
 	move_and_slide()
 	
