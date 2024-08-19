@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxd0g21s36l18"]
+[gd_scene load_steps=7 format=3 uid="uid://cxd0g21s36l18"]
 
 [ext_resource type="Script" path="res://game.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://dsid8recbau6c" path="res://sounds/sfx/waves.mp3" id="2_2ndbh"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "RESET"
@@ -56,5 +57,10 @@ libraries = {
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 color = Color(0.428118, 0.428118, 0.428118, 0.0506959)
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="waves" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("2_2ndbh")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

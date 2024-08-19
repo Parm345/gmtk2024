@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://376hhjxnb2uc"]
+[gd_scene load_steps=9 format=3 uid="uid://376hhjxnb2uc"]
 
-[ext_resource type="PackedScene" uid="uid://bsr5kxks68jr5" path="res://Player/player.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bg4xrv8gigc24" path="res://Player/player.tscn" id="1"]
+[ext_resource type="Script" path="res://Levels/Level_1.gd" id="1_ktlp2"]
 [ext_resource type="PackedScene" uid="uid://g58o2rko20qb" path="res://Lures/lure.tscn" id="3_5un41"]
 [ext_resource type="PackedScene" uid="uid://ohk5kl102qx7" path="res://NPCs/Prey Animals/shrimp.tscn" id="3_aq617"]
+[ext_resource type="Script" path="res://Camera/TrackingCam.gd" id="4_stgjt"]
+[ext_resource type="PackedScene" uid="uid://e0mkdpbogaqs" path="res://Levels/map.tscn" id="5_23nkc"]
 
 [sub_resource type="NavigationPolygon" id="1"]
 vertices = PackedVector2Array(1, 0, 1028, 3, 1026, 604, -1, 597)
@@ -13,13 +16,26 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jau1a"]
 size = Vector2(24, 668)
 
-[node name="Level1" type="Node2D"]
+[node name="Level1" type="Node2D" node_paths=PackedStringArray("player", "map")]
+script = ExtResource("1_ktlp2")
+player = NodePath("Player")
+map = NodePath("map")
+max_pos_t = Vector2i(3200, 2560)
+
+[node name="map" parent="." instance=ExtResource("5_23nkc")]
 
 [node name="Player" parent="." instance=ExtResource("1")]
-position = Vector2(213, 73)
+position = Vector2(40.5, 31.625)
+scale = Vector2(4, 4)
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player", "level")]
+script = ExtResource("4_stgjt")
+player = NodePath("../Player")
+level = NodePath("..")
 
 [node name="NavMesh" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("1")
+metadata/_edit_lock_ = true
 
 [node name="InvisWall1" type="StaticBody2D" parent="."]
 metadata/_edit_group_ = true
@@ -37,13 +53,13 @@ position = Vector2(-2, 324)
 shape = SubResource("RectangleShape2D_jau1a")
 
 [node name="Lure" parent="." instance=ExtResource("3_5un41")]
-position = Vector2(571, 159)
+position = Vector2(138.5, 63.5)
 LURE_LEVEL = 2
 
 [node name="Shrimp" parent="." instance=ExtResource("3_aq617")]
-position = Vector2(192, 401)
+position = Vector2(72, 61)
 PRED_LEVEL = 1
 
 [node name="Shrimp2" parent="." instance=ExtResource("3_aq617")]
-position = Vector2(661, 416)
+position = Vector2(159.375, 175.5)
 PRED_LEVEL = 1

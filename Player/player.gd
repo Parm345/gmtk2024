@@ -35,7 +35,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var mouseDirection:Vector2 = get_viewport().get_mouse_position() - global_position
+	var mouseDirection:Vector2 = get_global_mouse_position() - global_position
 	if not isBursting:
 		set_rotation(mouseDirection.angle()) # make sure to fix whe bursting
 	
@@ -45,7 +45,7 @@ func _process(delta):
 	
 	if mouseDirection.x > 0:
 		$AnimatedSprite2D.flip_v = false
-	if mouseDirection.x < 0:
+	elif mouseDirection.x < 0:
 		$AnimatedSprite2D.flip_v = true
 
 func _physics_process(delta):

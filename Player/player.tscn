@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bsr5kxks68jr5"]
+[gd_scene load_steps=43 format=3 uid="uid://bg4xrv8gigc24"]
 
 [ext_resource type="Script" path="res://Objects/FSM/FiniteStateMachine.gd" id="1"]
 [ext_resource type="Script" path="res://Player/player.gd" id="2"]
@@ -231,6 +231,7 @@ size = Vector2(28, 14)
 size = Vector2(6.5, 14)
 
 [node name="Player" type="CharacterBody2D" groups=["prey"]]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
