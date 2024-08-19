@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://c3qjiufxudvev"]
+
+[ext_resource type="Texture2D" uid="uid://b88vx120gg0qa" path="res://sprites/sheets/icon_cover2.png" id="1_d641o"]
+[ext_resource type="Script" path="res://Levels/Level_0.gd" id="1_xt3ym"]
+[ext_resource type="Texture2D" uid="uid://c2nix6r3q84sw" path="res://sprites/sheets/icon_button2_normal.png" id="2_hjs7q"]
+[ext_resource type="Texture2D" uid="uid://cle78khs5ydaa" path="res://sprites/sheets/icon_button2_pressed.png" id="3_wnbsn"]
+[ext_resource type="Texture2D" uid="uid://bsjw52xa1p7wk" path="res://sprites/sheets/icon_button2_hover.png" id="4_d6qfm"]
+[ext_resource type="Texture2D" uid="uid://pfwqjjyurcaf" path="res://sprites/sheets/icon_button1_normal.png" id="5_146mp"]
+[ext_resource type="BitMap" uid="uid://c7ewihnr3k0vd" path="res://sprites/sheets/icon_button_bitmap.png" id="5_pqls5"]
+[ext_resource type="Texture2D" uid="uid://coejfexpprar6" path="res://sprites/sheets/icon_button1_pressed.png" id="6_7iu6o"]
+[ext_resource type="Texture2D" uid="uid://dtjyvyule62oc" path="res://sprites/sheets/icon_button1_hover.png" id="7_ijwfa"]
+
+[node name="Level0" type="Node2D"]
+script = ExtResource("1_xt3ym")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+scale = Vector2(4, 4)
+texture = ExtResource("1_d641o")
+
+[node name="Control" type="Control" parent="."]
+z_index = 88
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 1
+
+[node name="StartButton" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -448.0
+offset_top = -320.0
+offset_right = -384.0
+offset_bottom = -304.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(4, 4)
+focus_mode = 0
+texture_normal = ExtResource("2_hjs7q")
+texture_pressed = ExtResource("3_wnbsn")
+texture_hover = ExtResource("4_d6qfm")
+texture_click_mask = ExtResource("5_pqls5")
+
+[node name="AchievementsButton" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -448.0
+offset_top = -272.0
+offset_right = -384.0
+offset_bottom = -256.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(4, 4)
+focus_mode = 0
+texture_normal = ExtResource("5_146mp")
+texture_pressed = ExtResource("6_7iu6o")
+texture_hover = ExtResource("7_ijwfa")
+texture_click_mask = ExtResource("5_pqls5")
+
+[connection signal="pressed" from="Control/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/AchievementsButton" to="." method="_on_achievements_button_pressed"]

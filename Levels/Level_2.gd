@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var game:Node2D = $/root/Game;
+@onready var game:Node2D = $"/root/Game";
 @export var player:Node2D;
 @export var map:TileMap;
 

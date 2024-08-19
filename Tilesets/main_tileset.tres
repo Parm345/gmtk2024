@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=15 format=3 uid="uid://07supqfwvr8x"]
+[gd_resource type="TileSet" load_steps=17 format=3 uid="uid://07supqfwvr8x"]
 
 [ext_resource type="Texture2D" uid="uid://dmaaa55y8x40u" path="res://sprites/sheets/map_tiles_island.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://dmpcinowp8w3a" path="res://sprites/sheets/map_tiles_ocean.png" id="2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bajgvdnf68nm3" path="res://sprites/sheets/map_tiles_sky.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://nwxj0rr0alek" path="res://sprites/sheets/map_tiles_submarine.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://4x0o43mngqgl" path="res://sprites/sheets/map_tiles_water.png" id="6_24frd"]
+[ext_resource type="Texture2D" uid="uid://bwj3d057v0lgi" path="res://sprites/sheets/icon_achievements.png" id="7_1ygqx"]
 [ext_resource type="Texture2D" uid="uid://rielxan7hshb" path="res://sprites/sheets/map_sewer_discharge.png" id="7_8efgt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pi4qa"]
@@ -8240,6 +8241,57 @@ texture = ExtResource("6_24frd")
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:0/0/physics_layer_0/angular_velocity = 0.0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mxp8w"]
+texture = ExtResource("7_1ygqx")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+4:0/0 = 0
+4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:0/0/physics_layer_0/angular_velocity = 0.0
+5:0/0 = 0
+5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+5:0/0/physics_layer_0/angular_velocity = 0.0
+6:0/0 = 0
+6:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+6:0/0/physics_layer_0/angular_velocity = 0.0
+7:0/0 = 0
+7:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+7:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+3:1/0 = 0
+3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:1/0/physics_layer_0/angular_velocity = 0.0
+4:1/0 = 0
+4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:1/0/physics_layer_0/angular_velocity = 0.0
+5:1/0 = 0
+5:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+5:1/0/physics_layer_0/angular_velocity = 0.0
+6:1/0 = 0
+6:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+6:1/0/physics_layer_0/angular_velocity = 0.0
+7:1/0 = 0
+7:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+7:1/0/physics_layer_0/angular_velocity = 0.0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o3tqg"]
 texture = ExtResource("7_8efgt")
 0:0/animation_columns = 4
@@ -8268,3 +8320,4 @@ sources/3 = SubResource("TileSetAtlasSource_abh1p")
 sources/4 = SubResource("TileSetAtlasSource_8xjry")
 sources/5 = SubResource("TileSetAtlasSource_fq7xr")
 sources/7 = SubResource("TileSetAtlasSource_o3tqg")
+sources/6 = SubResource("TileSetAtlasSource_mxp8w")

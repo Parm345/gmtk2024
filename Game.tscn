@@ -1,47 +1,23 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxd0g21s36l18"]
+[gd_scene load_steps=16 format=3 uid="uid://cxd0g21s36l18"]
 
 [ext_resource type="Script" path="res://game.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://dsid8recbau6c" path="res://sounds/sfx/waves.mp3" id="2_2ndbh"]
 [ext_resource type="PackedScene" uid="uid://135ebxe2kw4h" path="res://LoadScreen/load_screen.tscn" id="3_688pr"]
-
-[sub_resource type="Animation" id="2"]
-resource_name = "fade_in_fish"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/LoadScreen:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="3"]
-resource_name = "fade_out_fish"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/LoadScreen:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
+[ext_resource type="Texture2D" uid="uid://c1q173elgf40c" path="res://sprites/sheets/icon_button3_normal.png" id="3_nyoek"]
+[ext_resource type="Theme" uid="uid://dox8k0rlrytam" path="res://Themes/main_theme.tres" id="3_yh7yr"]
+[ext_resource type="Texture2D" uid="uid://dd5x6xtl6glaq" path="res://sprites/sheets/icon_button3_pressed.png" id="4_edc25"]
+[ext_resource type="Texture2D" uid="uid://xlvse0p582ls" path="res://sprites/sheets/icon_button3_hover.png" id="5_2c08c"]
+[ext_resource type="BitMap" uid="uid://qa5wgo0kivac" path="res://sprites/sheets/icon_button3_bitmap.png" id="6_cdp5i"]
+[ext_resource type="Texture2D" uid="uid://cfcu0awo3mw1e" path="res://sprites/sheets/icon_button4_normal.png" id="7_kpbut"]
+[ext_resource type="Texture2D" uid="uid://078k6x7jkstv" path="res://sprites/sheets/icon_button4_pressed.png" id="8_140k8"]
+[ext_resource type="Texture2D" uid="uid://wsg8wfs2vvqy" path="res://sprites/sheets/icon_button4_hover.png" id="9_qkkyc"]
 
 [sub_resource type="Animation" id="Animation_sow86"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/LoadScreen:modulate")
+tracks/0/path = NodePath("GUI/LoadScreen:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -49,6 +25,38 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="2"]
+resource_name = "fade_in_fish"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GUI/LoadScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="3"]
+resource_name = "fade_out_fish"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GUI/LoadScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4tgvg"]
@@ -68,10 +76,98 @@ libraries = {
 "": SubResource("AnimationLibrary_4tgvg")
 }
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="LoadScreen" parent="CanvasLayer" instance=ExtResource("3_688pr")]
+[node name="LoadScreen" parent="GUI" instance=ExtResource("3_688pr")]
 modulate = Color(1, 1, 1, 0)
+mouse_filter = 2
+
+[node name="PauseMenu" type="Control" parent="GUI"]
+visible = false
+z_index = 100
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 1
+
+[node name="ColorRect" type="ColorRect" parent="GUI/PauseMenu"]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0.658824)
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -168.0
+offset_right = 192.0
+offset_bottom = 216.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/PauseMenu/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Resume" type="Button" parent="GUI/PauseMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(320, 40)
+layout_mode = 2
+text = "Resume"
+
+[node name="Home" type="Button" parent="GUI/PauseMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(320, 40)
+layout_mode = 2
+text = "Home"
+
+[node name="Quit" type="Button" parent="GUI/PauseMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(320, 40)
+layout_mode = 2
+text = "Quit"
+
+[node name="Buttons" type="MarginContainer" parent="GUI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -400.0
+offset_right = -300.0
+offset_bottom = 24.0
+grow_horizontal = 0
+scale = Vector2(4, 4)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/Buttons"]
+layout_direction = 3
+layout_mode = 2
+theme = ExtResource("3_yh7yr")
+
+[node name="Pause" type="TextureButton" parent="GUI/Buttons/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture_normal = ExtResource("3_nyoek")
+texture_pressed = ExtResource("4_edc25")
+texture_hover = ExtResource("5_2c08c")
+texture_click_mask = ExtResource("6_cdp5i")
+stretch_mode = 4
+
+[node name="Back" type="TextureButton" parent="GUI/Buttons/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+disabled = true
+texture_normal = ExtResource("7_kpbut")
+texture_pressed = ExtResource("8_140k8")
+texture_hover = ExtResource("9_qkkyc")
+texture_click_mask = ExtResource("6_cdp5i")
+stretch_mode = 4
 
 [node name="Sounds" type="Node2D" parent="."]
 
@@ -79,3 +175,8 @@ modulate = Color(1, 1, 1, 0)
 stream = ExtResource("2_2ndbh")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="pressed" from="GUI/PauseMenu/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="GUI/PauseMenu/MarginContainer/VBoxContainer/Home" to="." method="_on_home_pressed"]
+[connection signal="pressed" from="GUI/PauseMenu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="GUI/Buttons/HBoxContainer/Pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="GUI/Buttons/HBoxContainer/Back" to="." method="_on_back_pressed"]

@@ -2,6 +2,8 @@
 
 90	transition overlay
 
+88	home buttons
+
 80	foreground plant
 
 60	garbage_front
@@ -9,6 +11,7 @@
 50	player fish
 49	npc fish
 
+46	cd-attached plaque
 45	collidable decor
 
 40	garbage_back

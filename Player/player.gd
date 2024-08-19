@@ -86,6 +86,8 @@ func _input(event):
 			# something from it
 			call_deferred("bite")
 
+#put burst here so button presses don't trigger it
+func _unhandled_input(event):
 	if event.is_action_pressed("burst") and isBurstEnabled:
 		burstDirection = (event.position - global_position).normalized()
 		isBursting = true

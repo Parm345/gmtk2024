@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var game:Node2D = $/root/Game;
+@onready var game:Node2D = $"/root/Game";
 @export var player:Node2D;
 @export var map:TileMap;
 
@@ -28,4 +28,4 @@ func _on_waves_finished():
 
 func _input(event):
 	if event.is_action_pressed("restart"):
-		game.change_level_faded(0);
+		game.change_level_faded(1);
