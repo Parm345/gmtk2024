@@ -9,6 +9,7 @@ extends CharacterBody2D
 @export var ACCL = 50
 @export var BURST_FORCE = 1000
 @export var MAX_SPEED = 350
+@export var BITE_STRENGTH = 10
 @export var health = 12
 
 var isDead = false
@@ -16,6 +17,14 @@ var isDead = false
 var isBurstEnabled = true
 var isBursting = false
 var burstDirection:Vector2 = Vector2()
+
+var isAllowedToBite:bool = false
+var preyNodesInRange = []
+
+var isLureInRange:bool = false
+var isLureEquiped:bool = false
+var nearbyLure:Lure = null
+var equipedLure:Lure = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,7 +34,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var mouseDirection:Vector2 = get_viewport().get_mouse_position() - global_position
-	set_rotation(mouseDirection.angle()) # make sure to fix whe bursting
+	if not isBursting:
+		set_rotation(mouseDirection.angle()) # make sure to fix whe bursting
+	
+	if equipedLure != null:
+		equipedLure.global_position = $LureEquipSpot.global_position
+		equipedLure.global_rotation = $LureEquipSpot.global_rotation
 	
 	if mouseDirection.x > 0:
 		$Sprite.flip_v = false
@@ -58,6 +72,10 @@ func _input(event):
 			velocity.x = 0
 		if event.is_action_released("up") or event.is_action_released("down"):
 			velocity.y = 0
+		if event.is_action_pressed("bite"):
+			# called during idle time cuz godot doesn't support looping through arrays if you delete 
+			# delete something from it
+			call_deferred("bite")
 
 	if event.is_action_pressed("burst") and isBurstEnabled:
 		burstDirection = (event.position - global_position).normalized()
@@ -77,4 +95,29 @@ func takeDamage(damageDealt):
 	if health <= 0:
 		$FSM.overrideState($FSM.states.Death)
 		isDead = true
-		
+
+func bite():
+	if not isLureEquiped:
+		for prey in preyNodesInRange:
+			prey.takeDamage(BITE_STRENGTH)
+		if isLureInRange:
+			equipedLure = nearbyLure
+			isLureEquiped = true
+			return
+	if isLureEquiped:
+		equipedLure = null
+		isLureEquiped = false
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("npc_prey") and body != self:
+		preyNodesInRange.append(body)
+	if body.is_in_group("lure"):
+		isLureInRange = true
+		nearbyLure = body
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body.is_in_group("npc_prey") and body != self:
+		preyNodesInRange.erase(body)
+	if body.is_in_group("lure"):
+		isLureInRange = false
+		nearbyLure = null

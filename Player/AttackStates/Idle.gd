@@ -1,12 +1,14 @@
 extends State
 
+var isAllowedToBite:bool = false
+
 # Called when the parent enters the state
 func enter():
-	$BiteTimer.start()
+	pass 
 
 # Called when parent leaves the state, most likely not necessary 
 func exit():
-	$BiteTimer.stop()
+	pass
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame. Run in FSM _physics_process.
 func inPhysicsProcess(delta):
@@ -18,19 +20,12 @@ func inProcess(delta):
 
 func changeParentState():
 	if actor.isDead:
-		return states.Idle
-	if not actor.isPreyInBiteRange:
-		return states.Idle
+		return null
+	if isAllowedToBite:
+		return states.Bite
 	return null
 
-func handleInput(event):
-	pass
+func handleInput(event:InputEvent):
+	if event.is_action_pressed("bite"):
+		isAllowedToBite = true
 
-func _on_bite_box_body_exited(body: Node2D) -> void:
-	if not actor == null:
-		actor.isPreyInBiteRange = false
-
-func _on_bite_timer_timeout() -> void:
-	actor.bitePrey()
-	if actor.isDead:
-		actor.heal()

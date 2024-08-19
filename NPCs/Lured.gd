@@ -6,7 +6,7 @@ var lurePos:Vector2 = Vector2()
 # Called when the actor (FSM controller parent) enters the state
 func enter():
 	actor.isChasingPrey = true
-	print("lured")
+	lurePos = actor.lure.global_position
 
 # Called when parent leaves the state, most likely not necessary 
 func exit():
@@ -15,7 +15,8 @@ func exit():
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame. Run in FSM _physics_process.
 func inPhysicsProcess(delta):
-	lurePos = actor.lure.global_position
+	if actor.isLured:
+		lurePos = actor.lure.global_position
 	actor.setMovementTarget(lurePos)
 	isTargetReached = actor.moveToTargetPosition(delta)
 	
@@ -24,7 +25,7 @@ func inProcess(_delta):
 	pass
 
 func changeParentState():
-	if not actor.isLured:
+	if not actor.isLured and isTargetReached:
 		return states.Idle
 	return null
 

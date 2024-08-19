@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bsr5kxks68jr5"]
+[gd_scene load_steps=13 format=3 uid="uid://bsr5kxks68jr5"]
 
 [ext_resource type="Script" path="res://Objects/FSM/FiniteStateMachine.gd" id="1"]
 [ext_resource type="Script" path="res://Player/player.gd" id="2"]
@@ -7,11 +7,16 @@
 [ext_resource type="Script" path="res://Player/Scripts/Burst.gd" id="5"]
 [ext_resource type="Texture2D" uid="uid://bh4v08ktcifve" path="res://icon.png" id="6"]
 [ext_resource type="Script" path="res://Player/Scripts/Death.gd" id="7_405ss"]
+[ext_resource type="Script" path="res://Player/AttackStates/Idle.gd" id="8_25c8q"]
+[ext_resource type="Script" path="res://Player/AttackStates/Bite.gd" id="9_trvwc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4vdmn"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(40, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxdxo"]
+size = Vector2(20, 40)
 
 [node name="Player" type="CharacterBody2D" groups=["prey"]]
 script = ExtResource("2")
@@ -49,5 +54,30 @@ script = ExtResource("7_405ss")
 [node name="BurstCoolDown" type="Timer" parent="."]
 one_shot = true
 
+[node name="AttackFSM" type="Node2D" parent="."]
+script = ExtResource("1")
+
+[node name="Idle" type="Node2D" parent="AttackFSM"]
+script = ExtResource("8_25c8q")
+
+[node name="Bite" type="Node2D" parent="AttackFSM"]
+script = ExtResource("9_trvwc")
+
+[node name="Grab" type="Node2D" parent="AttackFSM"]
+
+[node name="BiteBox" type="Area2D" parent="."]
+position = Vector2(30, 0)
+collision_layer = 2
+collision_mask = 2
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BiteBox"]
+shape = SubResource("RectangleShape2D_uxdxo")
+
+[node name="LureEquipSpot" type="Marker2D" parent="."]
+position = Vector2(30, 0)
+
 [connection signal="timeout" from="FSM/Burst/BurstTimer" to="FSM/Burst" method="_on_BurstTimer_timeout"]
 [connection signal="timeout" from="BurstCoolDown" to="." method="_on_BurstCoolDown_timeout"]
+[connection signal="body_entered" from="BiteBox" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="BiteBox" to="." method="_on_area_2d_body_exited"]

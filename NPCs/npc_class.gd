@@ -7,7 +7,8 @@ class_name NPC
 @export var PREY_TRACK_LEN:int = 105
 @export var PRED_LEVEL:int = 10
 @export var HUNGER_DAMAGE = 1
-@export var MAX_HEALTH = 12;
+@export var MAX_HEALTH = 12
+@export var BITE_DAMAGE = 12
 @export var wanderLength = 40
 
 @onready var health = MAX_HEALTH: set = takeDamage
@@ -88,7 +89,12 @@ func takeDamage(damageDealt):
 	if health <= 0:
 		$FSM.overrideState($FSM.states.Death)
 		isDead = true
-		print("hurt")
+
+func heal():
+	health = MAX_HEALTH
+
+func bitePrey():
+	prey.takeDamage(BITE_DAMAGE)
 
 func _on_vision_cone_body_entered(body: Node2D) -> void:
 	if body.is_in_group("prey"):
@@ -110,9 +116,15 @@ func _on_lure_vision_body_entered(body: Node2D) -> void:
 			lure = body
 			$FSM.overrideState($FSM.states.Lured)
 
+func _on_lure_vision_body_exited(body: Node2D) -> void:
+	if body.is_in_group("lure") and not isDead:
+		if body.LURE_LEVEL >= PRED_LEVEL - 2 and body.LURE_LEVEL <= PRED_LEVEL + 2 and body.isActiveLure:
+			isLured = false
+			print(isLured)
+
 func _on_bite_box_body_entered(body: Node2D) -> void:
 	if body.is_in_group("prey") and not isDead and not isLured:
-		pass
+		isPreyInBiteRange = true
 	if body.is_in_group("lure") and not isDead and isLured:
 		body.eatLure()
 		takeDamage(MAX_HEALTH)

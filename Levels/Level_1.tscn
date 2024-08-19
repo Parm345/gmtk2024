@@ -22,7 +22,10 @@ position = Vector2(213, 73)
 navigation_polygon = SubResource("1")
 
 [node name="Predator" parent="." instance=ExtResource("2_7sw0l")]
-position = Vector2(359, 285)
+position = Vector2(225, 459)
+
+[node name="Predator2" parent="." instance=ExtResource("2_7sw0l")]
+position = Vector2(638, 458)
 
 [node name="Area2D" type="StaticBody2D" parent="."]
 metadata/_edit_group_ = true

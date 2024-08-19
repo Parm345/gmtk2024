@@ -21,7 +21,7 @@ size = Vector2(38, 38)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yl8ir"]
 size = Vector2(21, 38)
 
-[node name="Predator" type="CharacterBody2D"]
+[node name="Predator" type="CharacterBody2D" groups=["npc_prey"]]
 script = ExtResource("1_fpnbm")
 wanderLength = 300
 
@@ -72,6 +72,8 @@ monitorable = false
 polygon = PackedVector2Array(0, 0, 64, 64, 96, 40, 96, -48, 64, -64)
 
 [node name="LureVision" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LureVision"]
@@ -109,8 +111,11 @@ script = ExtResource("11_08bcs")
 [node name="Bite" type="Node2D" parent="AttackFSM"]
 script = ExtResource("12_gvgtm")
 
+[node name="BiteTimer" type="Timer" parent="AttackFSM/Bite"]
+
 [node name="BiteBox" type="Area2D" parent="."]
 position = Vector2(32, 0)
+collision_mask = 3
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BiteBox"]
@@ -121,5 +126,8 @@ shape = SubResource("RectangleShape2D_yl8ir")
 [connection signal="timeout" from="FSM/Idle/IdleTimeOut" to="FSM/Idle" method="_on_IdleTimeOut_timeout"]
 [connection signal="body_entered" from="VisionCone" to="." method="_on_vision_cone_body_entered"]
 [connection signal="body_entered" from="LureVision" to="." method="_on_lure_vision_body_entered"]
+[connection signal="body_exited" from="LureVision" to="." method="_on_lure_vision_body_exited"]
 [connection signal="timeout" from="HungerTimer" to="." method="_on_hunger_timer_timeout"]
+[connection signal="timeout" from="AttackFSM/Bite/BiteTimer" to="AttackFSM/Bite" method="_on_bite_timer_timeout"]
 [connection signal="body_entered" from="BiteBox" to="." method="_on_bite_box_body_entered"]
+[connection signal="body_exited" from="BiteBox" to="AttackFSM/Bite" method="_on_bite_box_body_exited"]
