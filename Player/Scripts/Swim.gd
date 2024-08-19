@@ -2,11 +2,11 @@ extends State
 
 # Called when the actor (FSM controller parent) enters the state
 func enter():
-	pass
+	actor.playAnimation("swim")
 
 # Called when parent leaves the state, most likely not necessary 
 func exit():
-	pass
+	actor.get_node("AnimatedSprite2D").pause()
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame. Run in FSM _physics_process.
 func inPhysicsProcess(_delta):

@@ -6,7 +6,8 @@ var isDoneBursting = false
 func enter():
 	isDoneBursting = false
 	actor.velocity = actor.burstDirection * actor.BURST_FORCE
-	print(actor.velocity)
+	#print(actor.velocity)
+	actor.playAnimation("accel")
 	$BurstTimer.start()
 
 # Called when parent leaves the state, most likely not necessary 

@@ -5,7 +5,7 @@ var isBursting = false
 # Called when the actor (FSM controller parent) enters the state
 func enter():
 	actor.velocity = Vector2()
-	pass
+	actor.playAnimation("swim")
 
 # Called when parent leaves the state, most likely not necessary 
 func exit():

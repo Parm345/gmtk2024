@@ -26,6 +26,8 @@ var isLureEquiped:bool = false
 var nearbyLure:Lure = null
 var equipedLure:Lure = null
 
+var prevAnim:String = ""
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$FSM.setState($FSM.states.Idle)
@@ -42,9 +44,9 @@ func _process(delta):
 		equipedLure.global_rotation = $LureEquipSpot.global_rotation
 	
 	if mouseDirection.x > 0:
-		$Sprite.flip_v = false
+		$AnimatedSprite2D.flip_v = false
 	if mouseDirection.x < 0:
-		$Sprite.flip_v = true
+		$AnimatedSprite2D.flip_v = true
 
 func _physics_process(delta):
 	var movementDirection:Vector2 = Vector2()
@@ -73,14 +75,28 @@ func _input(event):
 		if event.is_action_released("up") or event.is_action_released("down"):
 			velocity.y = 0
 		if event.is_action_pressed("bite"):
+			prevAnim = $AnimatedSprite2D.animation
+			for prey in preyNodesInRange:
+				if prey.PRED_LEVEL > 5:
+					playAnimation("bite2") 
+			if $AnimatedSprite2D.animation != "bite2":
+				playAnimation("bite1")
+			
 			# called during idle time cuz godot doesn't support looping through arrays if you delete 
-			# delete something from it
+			# something from it
 			call_deferred("bite")
 
 	if event.is_action_pressed("burst") and isBurstEnabled:
 		burstDirection = (event.position - global_position).normalized()
 		isBursting = true
 		isBurstEnabled = false
+
+func playAnimation(animationName: String) -> void:
+	$AnimatedSprite2D.play(animationName)
+	if animationName == "bite2":
+		$AnimatedSprite2D.offset.y = 8
+	else:
+		$AnimatedSprite2D.offset.y = 0
 
 func enableBurstCoolDown():
 	$BurstCoolDown.start()

@@ -1,8 +1,10 @@
 extends State
 
+var prevAnim:String = ""
+
 # Called when the parent enters the state
 func enter():
-	pass 
+	pass
 
 # Called when parent leaves the state, most likely not necessary 
 func exit():
