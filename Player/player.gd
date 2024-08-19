@@ -15,7 +15,7 @@ signal moved;
 @export var MAX_LENSQ_TO_MOUSE_FOR_BRAKE = 64 #exclusive
 @export var MIN_LENSQ_TO_MOUSE_FOR_ACCL = 64 #inclusive
 @export var MIN_LENSQ_TO_MOUSE_FOR_ROTATION = 0; #inclusive
-@export var OSC_DIR_DAMPENING = 0.1
+@export var OSC_DIR_DAMPENING = 0.05
 @export var health = 12
 
 var mouseDirection:Vector2;
