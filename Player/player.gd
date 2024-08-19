@@ -39,7 +39,7 @@ func _ready():
 func _process(_delta):
 	var mouseDirection:Vector2 = get_global_mouse_position() - global_position
 	if not isBursting:
-		set_rotation(mouseDirection.angle()) # make sure to fix whe bursting
+		set_rotation(mouseDirection.angle()) # make sure rotation constant when bursting
 	
 	if equipedLure != null:
 		equipedLure.global_position = $LureEquipSpot.global_position
@@ -51,19 +51,9 @@ func _process(_delta):
 		$AnimatedSprite2D.flip_v = true
 
 func _physics_process(_delta):
-	print("state: ", $FSM.curState);
-	var movementDirection:Vector2 = Vector2.ZERO
-	
 	if !isBursting:
-		if Input.is_action_pressed("left"):
-			movementDirection.x -= 1;
-		if Input.is_action_pressed("right"):
-			movementDirection.x += 1;
-		if Input.is_action_pressed("up"):
-			movementDirection.y -= 1;
-		if Input.is_action_pressed("down"):
-			movementDirection.y += 1;
-	velocity += movementDirection.normalized()*ACCL
+		var mouse_dir:Vector2 = (get_global_mouse_position() - global_position).normalized();
+		velocity += mouse_dir * ACCL;
 	
 	if $FSM.curState != $FSM.states.Burst:
 		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
@@ -94,7 +84,7 @@ func _input(event):
 #put burst here so button presses don't trigger it
 func _unhandled_input(event):
 	if event.is_action_pressed("burst") and isBurstEnabled:
-		burstDirection = (event.global_position - global_position).normalized()
+		burstDirection = (get_global_mouse_position() - global_position).normalized()
 		isBursting = true
 		isBurstEnabled = false
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bg4xrv8gigc24"]
+[gd_scene load_steps=42 format=3 uid="uid://bg4xrv8gigc24"]
 
 [ext_resource type="Script" path="res://Objects/FSM/FiniteStateMachine.gd" id="1"]
 [ext_resource type="Script" path="res://Player/player.gd" id="2"]
@@ -224,9 +224,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(28, 14)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxdxo"]
 size = Vector2(6.5, 14)
 
@@ -238,8 +235,8 @@ sprite_frames = SubResource("SpriteFrames_4vdmn")
 animation = &"accel"
 frame_progress = 0.447976
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("1")
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -7, 2, -7, 6, -4, 9, -4, 14, -1, 14, 3, 9, 6, 4, 6, 3, 7, 1, 7, 1, 6, -3, 6, -6, 5, -8, 4, -10, 4, -12, 6, -13, 6, -13, 4, -11, 2, -14, -4, -14, -6, -13, -6, -11, -5, -7, -1, -4, -4, 1, -5)
 
 [node name="FSM" type="Node2D" parent="."]
 script = ExtResource("1")
