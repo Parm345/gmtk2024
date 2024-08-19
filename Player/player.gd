@@ -8,10 +8,18 @@ signal moved;
 @export var SPECIES_NAME = "Player"
 @export var ACCL = 50
 @export var BURST_FORCE = 1000
-@export var MAX_SPEED = 350
+@export var MAX_SPEED = 200
 @export var BITE_STRENGTH = 10
+@export var FRICTION_FACTOR_WATER = 0.98
+@export var FRICTION_FACTOR_BRAKE = 0.6
+@export var MAX_LENSQ_TO_MOUSE_FOR_BRAKE = 64 #exclusive
+@export var MIN_LENSQ_TO_MOUSE_FOR_ACCL = 64 #inclusive
+@export var MIN_LENSQ_TO_MOUSE_FOR_ROTATION = 0; #inclusive
+@export var OSC_DIR_DAMPENING = 0.1
 @export var health = 12
 
+var mouseDirection:Vector2;
+var lensqToMouse:float;
 var isDead = false
 
 var isBurstEnabled = true
@@ -37,8 +45,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	var mouseDirection:Vector2 = get_global_mouse_position() - global_position
-	if not isBursting:
+	if !isBursting and lensqToMouse >= MIN_LENSQ_TO_MOUSE_FOR_ROTATION:
 		set_rotation(mouseDirection.angle()) # make sure rotation constant when bursting
 	
 	if equipedLure != null:
@@ -51,9 +58,19 @@ func _process(_delta):
 		$AnimatedSprite2D.flip_v = true
 
 func _physics_process(_delta):
-	if !isBursting:
-		var mouse_dir:Vector2 = (get_global_mouse_position() - global_position).normalized();
-		velocity += mouse_dir * ACCL;
+	#friction
+	velocity *= FRICTION_FACTOR_WATER;
+	
+	mouseDirection = get_global_mouse_position() - global_position;
+	lensqToMouse = mouseDirection.length_squared();
+	if !isBursting and Input.is_action_pressed("move"):
+		if lensqToMouse >= MIN_LENSQ_TO_MOUSE_FOR_ACCL:
+			var mouseDirectionNorm:Vector2 = mouseDirection.normalized();
+			var oscillationDirNorm:Vector2 = Vector2(-mouseDirectionNorm.y, mouseDirectionNorm.x);
+			var velocityOscillationComp:Vector2 = velocity.dot(oscillationDirNorm) * oscillationDirNorm;
+			velocity += mouseDirectionNorm * ACCL - velocityOscillationComp * OSC_DIR_DAMPENING;
+		elif lensqToMouse < MAX_LENSQ_TO_MOUSE_FOR_BRAKE:
+			velocity *= FRICTION_FACTOR_BRAKE;
 	
 	if $FSM.curState != $FSM.states.Burst:
 		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
