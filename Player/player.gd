@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-
+signal moved;
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -28,6 +28,8 @@ var equipedLure:Lure = null
 
 var prevAnim:String = ""
 
+@onready var anim:AnimatedSprite2D = $AnimatedSprite2D;
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$FSM.setState($FSM.states.Idle)
@@ -49,7 +51,8 @@ func _process(delta):
 		$AnimatedSprite2D.flip_v = true
 
 func _physics_process(delta):
-	var movementDirection:Vector2 = Vector2()
+	print("state: ", $FSM.curState);
+	var movementDirection:Vector2 = Vector2.ZERO
 	
 	if !isBursting:
 		if Input.is_action_pressed("left"):
@@ -66,14 +69,14 @@ func _physics_process(delta):
 		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
 		velocity.y = clamp(velocity.y, -MAX_SPEED, MAX_SPEED)
 	
+	if velocity.length_squared() > 0:
+		moved.emit();
 	move_and_slide()
-	print("move_and_slid with v = ", velocity)
 
 func _input(event):
 	if !isBursting:
 		if event.is_action_released("left") or event.is_action_released("right"):
 			velocity.x = 0
-			print("vx set to 0")
 		if event.is_action_released("up") or event.is_action_released("down"):
 			velocity.y = 0
 		if event.is_action_pressed("bite"):

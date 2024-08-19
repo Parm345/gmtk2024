@@ -20,11 +20,10 @@ map = NodePath("map")
 max_pos_t = Vector2i(3200, 2560)
 
 [node name="map" parent="." instance=ExtResource("5_23nkc")]
-scale = Vector2(8, 8)
 
 [node name="Player" parent="." instance=ExtResource("1")]
 position = Vector2(336, 432)
-scale = Vector2(4, 4)
+scale = Vector2(2, 2)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player", "level")]
 position = Vector2(640, 352)

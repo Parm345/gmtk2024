@@ -5,8 +5,8 @@ signal transition_started(target:Vector2, track_dir:Vector2i);
 
 @onready var game:Node2D = $"/root/Game";
 
-@export var max_rx:float = 0.3125; #ratio between dx and viewport width to make camera move
-@export var max_ry:float = 0.25;
+@export var max_rx:float = 0.4; #ratio between dx and viewport width to make camera move
+@export var max_ry:float = 0.3;
 @export var player:Node2D;
 @export var level:Node2D;
 
@@ -36,8 +36,11 @@ func _ready():
 	var max_lv_pos:Vector2 = level.max_pos_t * game.TILE_WIDTH;
 	min_pos = Vector2(min_lv_pos.x + game.VIEWPORT_SIZE.x/2, min_lv_pos.y + game.VIEWPORT_SIZE.y/2);
 	max_pos = Vector2(max_lv_pos.x - game.VIEWPORT_SIZE.x/2, max_lv_pos.y - game.VIEWPORT_SIZE.y/2);
+	
+	#connect player_moved signal
+	player.moved.connect(_on_player_moved);
 
-func _process(_delta):
+func _on_player_moved():
 	if active:
 		#update track_pos
 		track_pos = player.position;

@@ -6,7 +6,7 @@ func enter():
 
 # Called when parent leaves the state, most likely not necessary 
 func exit():
-	actor.get_node("AnimatedSprite2D").pause()
+	actor.anim.pause()
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame. Run in FSM _physics_process.
 func inPhysicsProcess(_delta):

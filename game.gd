@@ -2,8 +2,8 @@ extends Node2D
 
 signal level_changed;
 
-const TRACKING_CAM_LEAD_RATIO:float = 1.35; #target = pos + ratio * (track_pos - pos)
-const TRACKING_CAM_SLACK_RATIO:float = 0.15; #0.25; #ratio applied to slack (tracking movement along the non-trigger axis)
+const TRACKING_CAM_LEAD_RATIO:float = 2; #target = pos + ratio * (track_pos - pos)
+const TRACKING_CAM_SLACK_RATIO:float = 0.9; #0.25; #ratio applied to slack (tracking movement along the non-trigger axis)
 const TRACKING_CAM_TRANSITION_TIME:float = 1.28;
 const LEVEL_COUNT:int = 4;
 const VIEWPORT_SIZE:Vector2i = Vector2i(1280, 720);

@@ -56,7 +56,6 @@ size = Vector2(14, 13)
 size = Vector2(5, 13)
 
 [node name="Shrimp" type="CharacterBody2D" groups=["npc_prey"]]
-scale = Vector2(2, 2)
 script = ExtResource("1_pjalo")
 wanderLength = 300
 
