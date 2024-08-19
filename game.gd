@@ -50,7 +50,7 @@ func change_level_faded(n):
 	current_level_index = n;
 	
 	#fade out
-	fader.play("fade_in_black");
+	fader.play("fade_in_fish");
 	if current_level.has_node("BGM"):
 		current_level.get_node("BGM").fade_out();
 
@@ -59,9 +59,9 @@ func setupNavServer():
 
 
 func _on_animation_player_animation_finished(anim_name):
-	if anim_name == "fade_in_black":
+	if anim_name == "fade_in_fish":
 		change_level(current_level_index);
-		fader.play("fade_out_black");
+		fader.play("fade_out_fish");
 
 func play_sound(s:String):
 	var audio_player:AudioStreamPlayer2D = sounds.get_node(s);

@@ -25,3 +25,7 @@ func get_wave_volume_db(depth_t:int):
 
 func _on_waves_finished():
 	game.play_sound("waves");
+
+func _input(event):
+	if event.is_action_pressed("restart"):
+		game.change_level_faded(0);

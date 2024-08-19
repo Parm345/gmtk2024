@@ -1,5 +1,6 @@
 100	menu/pause menu/settings
-99	GUI display and buttons
+
+90	transition overlay
 
 80	foreground plant
 

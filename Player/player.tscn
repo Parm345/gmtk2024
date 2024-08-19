@@ -231,7 +231,6 @@ size = Vector2(28, 14)
 size = Vector2(6.5, 14)
 
 [node name="Player" type="CharacterBody2D" groups=["prey"]]
-scale = Vector2(0.5, 0.5)
 script = ExtResource("2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

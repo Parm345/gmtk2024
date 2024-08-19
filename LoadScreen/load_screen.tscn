@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://135ebxe2kw4h"]
+
+[ext_resource type="Texture2D" uid="uid://dg31srnchec3n" path="res://sprites/sheets/player_fish1_jump.png" id="1_4t4qx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3qx7"]
+atlas = ExtResource("1_4t4qx")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ibqs"]
+atlas = ExtResource("1_4t4qx")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcgld"]
+atlas = ExtResource("1_4t4qx")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7srjn"]
+atlas = ExtResource("1_4t4qx")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55yic"]
+atlas = ExtResource("1_4t4qx")
+region = Rect2(128, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bv4g"]
+atlas = ExtResource("1_4t4qx")
+region = Rect2(192, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dml6"]
+atlas = ExtResource("1_4t4qx")
+region = Rect2(224, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eg1ne"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3qx7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ibqs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jcgld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7srjn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55yic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bv4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6dml6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}]
+
+[node name="LoadScreen" type="ColorRect"]
+z_index = 90
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(640, 360)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_eg1ne")
+autoplay = "default"
+frame = 5
+frame_progress = 0.645055

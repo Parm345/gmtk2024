@@ -1,46 +1,61 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxd0g21s36l18"]
+[gd_scene load_steps=8 format=3 uid="uid://cxd0g21s36l18"]
 
 [ext_resource type="Script" path="res://game.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://dsid8recbau6c" path="res://sounds/sfx/waves.mp3" id="2_2ndbh"]
-
-[sub_resource type="Animation" id="1"]
-resource_name = "RESET"
+[ext_resource type="PackedScene" uid="uid://135ebxe2kw4h" path="res://LoadScreen/load_screen.tscn" id="3_688pr"]
 
 [sub_resource type="Animation" id="2"]
-resource_name = "fade_in_black"
+resource_name = "fade_in_fish"
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/path = NodePath("CanvasLayer/LoadScreen:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 0.4),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.45098, 0.45098, 0.45098, 0), Color(0, 0, 0, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="3"]
-resource_name = "fade_out_black"
+resource_name = "fade_out_fish"
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/path = NodePath("CanvasLayer/LoadScreen:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sow86"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/LoadScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4tgvg"]
 _data = {
-"RESET": SubResource("1"),
-"fade_in_black": SubResource("2"),
-"fade_out_black": SubResource("3")
+"RESET": SubResource("Animation_sow86"),
+"fade_in_fish": SubResource("2"),
+"fade_out_fish": SubResource("3")
 }
 
 [node name="Game" type="Node2D"]
@@ -55,8 +70,8 @@ libraries = {
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-color = Color(0.428118, 0.428118, 0.428118, 0.0506959)
+[node name="LoadScreen" parent="CanvasLayer" instance=ExtResource("3_688pr")]
+modulate = Color(1, 1, 1, 0)
 
 [node name="Sounds" type="Node2D" parent="."]
 

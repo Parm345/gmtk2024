@@ -3,7 +3,6 @@
 [ext_resource type="TileSet" uid="uid://07supqfwvr8x" path="res://Tilesets/main_tileset.tres" id="1"]
 
 [node name="map" type="TileMap"]
-scale = Vector2(8, 8)
 tile_set = ExtResource("1")
 format = 2
 layer_0/name = "sky"
