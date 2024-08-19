@@ -67,11 +67,13 @@ func _physics_process(delta):
 		velocity.y = clamp(velocity.y, -MAX_SPEED, MAX_SPEED)
 	
 	move_and_slide()
+	print("move_and_slid with v = ", velocity)
 
 func _input(event):
 	if !isBursting:
 		if event.is_action_released("left") or event.is_action_released("right"):
 			velocity.x = 0
+			print("vx set to 0")
 		if event.is_action_released("up") or event.is_action_released("down"):
 			velocity.y = 0
 		if event.is_action_pressed("bite"):
