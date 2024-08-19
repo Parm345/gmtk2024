@@ -52,9 +52,9 @@ func changeParentState():
 		return states.Idle
 	return null
 
-func handleInput(event):
+func handleInput(_event):
 	pass
 
 
-func _on_VisionCone_body_entered(body):
+func _on_VisionCone_body_entered(_body):
 	pass # Replace with function body.

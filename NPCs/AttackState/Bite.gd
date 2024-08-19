@@ -9,11 +9,11 @@ func exit():
 	$BiteTimer.stop()
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame. Run in FSM _physics_process.
-func inPhysicsProcess(delta):
+func inPhysicsProcess(_delta):
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame. Run in FSM _process.
-func inProcess(delta):
+func inProcess(_delta):
 	pass
 
 func changeParentState():
@@ -23,10 +23,10 @@ func changeParentState():
 		return states.Idle
 	return null
 
-func handleInput(event):
+func handleInput(_event):
 	pass
 
-func _on_bite_box_body_exited(body: Node2D) -> void:
+func _on_bite_box_body_exited(_body: Node2D) -> void:
 	if not actor == null:
 		actor.isPreyInBiteRange = false
 

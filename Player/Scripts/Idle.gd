@@ -28,5 +28,5 @@ func changeParentState():
 		return states.Burst
 	return null
 
-func handleInput(event):
+func handleInput(_event):
 	pass

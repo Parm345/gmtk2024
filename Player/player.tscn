@@ -254,13 +254,14 @@ script = ExtResource("4")
 script = ExtResource("5")
 
 [node name="BurstTimer" type="Timer" parent="FSM/Burst"]
-wait_time = 0.5
+wait_time = 0.2
 one_shot = true
 
 [node name="Death" type="Node2D" parent="FSM"]
 script = ExtResource("7_405ss")
 
 [node name="BurstCoolDown" type="Timer" parent="."]
+wait_time = 0.4
 one_shot = true
 
 [node name="AttackFSM" type="Node2D" parent="."]

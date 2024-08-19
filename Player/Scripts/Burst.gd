@@ -28,7 +28,7 @@ func changeParentState():
 		return states.Idle
 	return null
 
-func handleInput(event):
+func handleInput(_event):
 	pass
 
 func _on_BurstTimer_timeout():

@@ -25,7 +25,7 @@ func changeParentState():
 		return states.Wander
 	return null
 
-func handleInput(event):
+func handleInput(_event):
 	pass
 
 
@@ -33,5 +33,5 @@ func _on_IdleTimeOut_timeout():
 	isIdling = false
 
 
-func _on_VisionCone_body_entered(body):
+func _on_VisionCone_body_entered(_body):
 	pass # Replace with function body.

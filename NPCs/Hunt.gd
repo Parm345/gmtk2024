@@ -27,5 +27,5 @@ func changeParentState():
 		return states.Search
 	return null
 
-func handleInput(event):
+func handleInput(_event):
 	pass

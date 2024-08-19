@@ -38,7 +38,7 @@ func _ready() -> void:
 	$NavigationAgent2D.target_desired_distance = PATH_TOLERANCE
 	$FSM.setState($FSM.states.Wander)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	pointPreySight()
 
 func setMovementTarget(target: Vector2) -> void:
@@ -48,7 +48,7 @@ func setRelativeMovementTarget(target: Vector2) -> void:
 	$NavigationAgent2D.target_position = global_position + target
 
 # execute in physics process and returns true if movement is complete 
-func moveToTargetPosition(delta:float) -> bool:
+func moveToTargetPosition(_delta:float) -> bool:
 	if $NavigationAgent2D.is_navigation_finished():
 		return true
 	

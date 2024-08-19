@@ -36,7 +36,7 @@ func _ready():
 	print(get_world_2d().navigation_map)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	var mouseDirection:Vector2 = get_global_mouse_position() - global_position
 	if not isBursting:
 		set_rotation(mouseDirection.angle()) # make sure to fix whe bursting
@@ -50,7 +50,7 @@ func _process(delta):
 	elif mouseDirection.x < 0:
 		$AnimatedSprite2D.flip_v = true
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	print("state: ", $FSM.curState);
 	var movementDirection:Vector2 = Vector2.ZERO
 	
@@ -94,7 +94,7 @@ func _input(event):
 #put burst here so button presses don't trigger it
 func _unhandled_input(event):
 	if event.is_action_pressed("burst") and isBurstEnabled:
-		burstDirection = (event.position - global_position).normalized()
+		burstDirection = (event.global_position - global_position).normalized()
 		isBursting = true
 		isBurstEnabled = false
 

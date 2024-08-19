@@ -25,5 +25,5 @@ func changeParentState():
 		return states.FightBack
 	return null
 
-func handleInput(event):
+func handleInput(_event):
 	pass

@@ -9,11 +9,11 @@ func exit():
 	pass
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame. Run in FSM _physics_process.
-func inPhysicsProcess(delta):
+func inPhysicsProcess(_delta):
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame. Run in FSM _process.
-func inProcess(delta):
+func inProcess(_delta):
 	pass
 
 func changeParentState():
@@ -23,7 +23,7 @@ func changeParentState():
 		return states.Bite
 	return null
 
-func handleInput(event):
+func handleInput(_event):
 	pass
 
 		
