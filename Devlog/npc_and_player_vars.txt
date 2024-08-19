@@ -1,0 +1,20 @@
+NPC
+-----------
+Species: Not needed anymore because I got rid of different fish attacking each other for fear of bugs
+NPC Speed: how fast the fish swims
+Path Tolerance: how close the NPC should be to the path
+Prey Track Len: the distance at which the fish will track the player
+Pred Level: the predator level of species, if it's below then 3 it won't attack the player
+Max health: health of the NPC
+Bite Damage: how  much damage the bite of the NPC does to the player
+Wander Length: length the NPC will swim when not chasing player
+
+Player
+------
+Accl: acceleration rate of player
+Burst Force: strength of burst
+Max Speed: max speed the player can go
+Bite Strength: damage the players bite deals
+Health: health of player
+
+right click: grab/release lures or bite NPCs
