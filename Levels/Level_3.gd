@@ -10,3 +10,4 @@ extends Node2D
 
 func _ready():
 	game.region_ost = "ost_archaeology";
+	game.ost_prob_on_timeout = 0.08;

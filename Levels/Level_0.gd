@@ -12,6 +12,7 @@ func _on_achievements_button_pressed():
 func _ready():
 	game.play_sound("ost_archaeology", false);
 	game.region_ost = "ost_archaeology";
+	game.ost_prob_on_timeout = 0.08;
 	
 	game.set_volume("waves", game.SFX_WAVES_DB_OFFSET);
 	game.play_sound("waves", false);

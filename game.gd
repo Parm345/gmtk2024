@@ -8,7 +8,6 @@ const TRACKING_CAM_TRANSITION_TIME:float = 1.28;
 const LEVEL_COUNT:int = 4;
 const VIEWPORT_SIZE:Vector2i = Vector2i(1280, 720);
 const TILE_WIDTH:int = 16;
-const OST_PROB_ON_TIMEOUT = 0.05;
 const SFX_WAVES_DB_OFFSET = -6;
 
 var levels = [];
@@ -16,13 +15,23 @@ var current_level_index:int = 0;
 var current_level:Node2D;
 var paused:bool = false;
 
+var initial_player_positions:Array = [
+	Vector2.ZERO,
+	Vector2(186, 265),
+	Vector2(4827, 1326),
+	Vector2.ZERO,
+]
+var saved_player_positions:Array = initial_player_positions;
+
 var ost_bus_index:int;
 var sfx_bus_index:int;
 var region_ost:String = ""; # set this for continued, random-start playing; should init in Level._ready()
+var ost_prob_on_timeout = 0.05;
 var curr_ost:String = ""; # name of current ost playing, empty if none
 
 # NPC navigation stuff
 var nav_map
+
 
 @onready var pause_menu:Control = $"GUI/PauseMenu";
 @onready var fader:AnimationPlayer = $AnimationPlayer;
@@ -131,6 +140,7 @@ func _on_resume_pressed():
 	toggle_pause_menu();
 
 func _on_home_pressed():
+	saved_player_positions[current_level_index] = initial_player_positions[current_level_index];
 	change_level_faded(0);
 	toggle_pause_menu();
 
@@ -150,7 +160,7 @@ func _on_sfx_value_changed(value):
 	AudioServer.set_bus_volume_db(sfx_bus_index, linear_to_db(value));
 
 func _on_ost_timer_timeout():
-	if region_ost and randf() < OST_PROB_ON_TIMEOUT:
+	if region_ost and randf() < ost_prob_on_timeout:
 		play_sound(region_ost, false);
 
 func _on_ost_deep_blue_finished():

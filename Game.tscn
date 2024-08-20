@@ -225,6 +225,7 @@ bus = &"ost"
 
 [node name="ost_decomposition" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("13_88ahb")
+volume_db = -4.0
 bus = &"ost"
 
 [node name="ost_archaeology" type="AudioStreamPlayer" parent="Sounds"]

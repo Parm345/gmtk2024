@@ -21,7 +21,6 @@ func exit():
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame. Run in FSM _physics_process.
 func inPhysicsProcess(_delta):
-	print('jumping')
 	actor.velocity.y += actor.GRAVITY
 	actor.velocity.x *= actor.FRICTION_FACTOR_AIR
 

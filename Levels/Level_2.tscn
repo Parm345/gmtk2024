@@ -1,15 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjmcadnyfn783"]
+[gd_scene load_steps=6 format=3 uid="uid://bjmcadnyfn783"]
 
 [ext_resource type="Script" path="res://Levels/Level_2.gd" id="1_fpqyi"]
 [ext_resource type="PackedScene" uid="uid://btwvoh8wv6gs5" path="res://Levels/sub.tscn" id="2_r2ryt"]
 [ext_resource type="PackedScene" uid="uid://bg4xrv8gigc24" path="res://Player/player.tscn" id="2_w5p6q"]
+[ext_resource type="Texture2D" uid="uid://dhafkaalitujg" path="res://sprites/sheets/icon_interact.png" id="4_6ffr7"]
+[ext_resource type="Script" path="res://Camera/TrackingCam.gd" id="4_18oov"]
 
 [node name="Level 2" type="Node2D" node_paths=PackedStringArray("player", "map")]
 script = ExtResource("1_fpqyi")
 player = NodePath("Player")
 map = NodePath("sub")
 max_pos_t = Vector2(116, 44)
+metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_w5p6q")]
+position = Vector2(4827, 1326)
+metadata/_edit_lock_ = true
 
 [node name="sub" parent="." instance=ExtResource("2_r2ryt")]
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player", "level")]
+position = Vector2(640, 360)
+script = ExtResource("4_18oov")
+player = NodePath("../Player")
+level = NodePath("..")
+
+[node name="Ocean" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ocean"]
+polygon = PackedVector2Array(4822, 1306, 4834, 1305, 4842, 1314, 4842, 1326, 4831, 1322, 4822, 1316)
+
+[node name="OceanInteract" type="Sprite2D" parent="."]
+visible = false
+z_index = 86
+position = Vector2(4830, 1260)
+scale = Vector2(4, 4)
+texture = ExtResource("4_6ffr7")
+
+[connection signal="body_entered" from="Ocean" to="." method="_on_ocean_body_entered"]
+[connection signal="body_exited" from="Ocean" to="." method="_on_ocean_body_exited"]

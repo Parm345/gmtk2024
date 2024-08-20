@@ -19,31 +19,38 @@ var has_ost_played:Dictionary = {
 
 func _ready():
 	game.region_ost = "";
+	game.ost_prob_on_timeout = 0.08;
 	
 	game.play_sound("waves", false);
 	game.sounds.get_node("waves").finished.connect(_on_waves_finished);
-	$Player.waterLevel = $WaterLevel
+	
+	player.waterLevel = $WaterLevel
+	player.global_position = game.saved_player_positions[game.current_level_index];
+	print(player.global_position);
 
 func _process(_delta):
 	#update wave volume
 	var player_depth_t:int = map.local_to_map(map.to_local(player.position)).y - water_level_ty;
+	#print(get_wave_volume_db(player_depth_t))
 	game.set_volume("waves", get_wave_volume_db(player_depth_t));
 
 func get_wave_volume_db(depth_t:int):
 	if depth_t < 0:
 		return game.SFX_WAVES_DB_OFFSET;
 	#return linear_to_db(clamp(1 - 0.0004 * depth_t, 0, 1)); #still too loud at depth
-	return game.SFX_WAVES_DB_OFFSET - 0.012 * depth_t;
+	return game.SFX_WAVES_DB_OFFSET - 0.125 * depth_t;
 
 func _on_waves_finished():
 	game.play_sound("waves", false);
 
 func _input(event):
 	if event.is_action_pressed("restart"):
+		game.saved_player_positions[1] = game.initial_player_positions[1];
 		game.change_level_faded(1);
 	elif event.is_action_pressed("interact"):
 		for body in $Submarine.get_overlapping_bodies():
 			if body == player:
+				game.saved_player_positions[1] = player.global_position;
 				game.change_level_faded(2);
 
 func _on_deep_blue_body_entered(body):

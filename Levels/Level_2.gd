@@ -10,3 +10,26 @@ extends Node2D
 
 func _ready():
 	game.region_ost = "ost_deep_think";
+	game.ost_prob_on_timeout = 0.3;
+	
+	player.global_position = game.saved_player_positions[game.current_level_index];
+
+func _on_ocean_body_entered(body):
+	if body != player:
+		return;
+	$OceanInteract.show();
+
+func _on_ocean_body_exited(body):
+	if body != player:
+		return;
+	$OceanInteract.hide();
+
+func _input(event):
+	if event.is_action_pressed("restart"):
+		game.saved_player_positions[2] = game.initial_player_positions[2];
+		game.change_level_faded(2);
+	elif event.is_action_pressed("interact"):
+		for body in $SOcean.get_overlapping_bodies():
+			if body == player:
+				game.saved_player_positions[2] = player.global_position;
+				game.change_level_faded(1);
