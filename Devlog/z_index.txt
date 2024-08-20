@@ -5,6 +5,8 @@
 88	home buttons
 86	interact hint
 
+82	water gradient
+
 80	foreground plant
 
 60	garbage_front
