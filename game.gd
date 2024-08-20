@@ -7,7 +7,7 @@ const TRACKING_CAM_SLACK_RATIO:float = 0.9; #0.25; #ratio applied to slack (trac
 const TRACKING_CAM_TRANSITION_TIME:float = 1.28;
 const LEVEL_COUNT:int = 4;
 const VIEWPORT_SIZE:Vector2i = Vector2i(1280, 720);
-const TILE_WIDTH:int = 16;
+const TILE_WIDTH:int = 64;
 const SFX_WAVES_DB_OFFSET = -6;
 
 var levels = [];

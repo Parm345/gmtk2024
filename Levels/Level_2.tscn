@@ -14,10 +14,11 @@ gradient = SubResource("Gradient_n0gjw")
 fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0)
 
-[node name="Level 2" type="Node2D" node_paths=PackedStringArray("player", "map")]
+[node name="Level 2" type="Node2D" node_paths=PackedStringArray("player", "map", "tracking_cam")]
 script = ExtResource("1_fpqyi")
 player = NodePath("Player")
 map = NodePath("sub")
+tracking_cam = NodePath("Camera2D")
 max_pos_t = Vector2(116, 44)
 metadata/_edit_lock_ = true
 

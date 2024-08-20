@@ -61,11 +61,12 @@ gradient = SubResource("Gradient_5uun2")
 fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0)
 
-[node name="Level1" type="Node2D" node_paths=PackedStringArray("player", "map")]
+[node name="Level1" type="Node2D" node_paths=PackedStringArray("player", "map", "tracking_cam")]
 script = ExtResource("1_ktlp2")
 player = NodePath("Player")
 map = NodePath("map")
-max_pos_t = Vector2i(3200, 2560)
+tracking_cam = NodePath("Camera2D")
+max_pos_t = Vector2i(199, 159)
 
 [node name="map" parent="." instance=ExtResource("5_23nkc")]
 

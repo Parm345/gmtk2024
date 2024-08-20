@@ -3,6 +3,7 @@ extends Node2D
 @onready var game:Node2D = $"/root/Game";
 @export var player:Node2D;
 @export var map:TileMap;
+@export var tracking_cam:Camera2D;
 
 @export var min_pos_t:Vector2i = Vector2i.ZERO;
 @export var max_pos_t:Vector2i = Vector2i.ZERO;
@@ -26,7 +27,7 @@ func _ready():
 	
 	player.waterLevel = $WaterLevel
 	player.global_position = game.saved_player_positions[game.current_level_index];
-	print(player.global_position);
+	tracking_cam.global_position = player.global_position;
 
 func _process(_delta):
 	#update wave volume
