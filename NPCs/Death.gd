@@ -4,6 +4,7 @@ extends State
 func enter():
 	actor.get_node("AnimatedSprite2D").set_animation("death")
 	actor.get_node("AnimatedSprite2D").play()
+	actor.queue_free() # get rid of this line once you add animation
 
 # Called when parent leaves the state, most likely not necessary 
 func exit():

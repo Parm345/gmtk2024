@@ -1,8 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://ohk5kl102qx7"]
+[gd_scene load_steps=21 format=3 uid="uid://ohk5kl102qx7"]
 
 [ext_resource type="Script" path="res://NPCs/npc_class.gd" id="1_pjalo"]
 [ext_resource type="Script" path="res://Objects/FSM/FiniteStateMachine.gd" id="2_6rslr"]
-[ext_resource type="Texture2D" uid="uid://61nqwfrb46u5" path="res://sprites/sheets/npc_shrimp_swim.png" id="2_wdw3f"]
+[ext_resource type="Texture2D" uid="uid://dfgalq66x8220" path="res://sprites/sheets/npc_shrimp_swim.png" id="2_wdw3f"]
 [ext_resource type="Script" path="res://NPCs/NPC States/Idle.gd" id="3_x6j04"]
 [ext_resource type="Script" path="res://NPCs/Wander.gd" id="4_4g0nq"]
 [ext_resource type="Script" path="res://NPCs/Search.gd" id="5_5hlgh"]
@@ -12,6 +12,10 @@
 [ext_resource type="Script" path="res://NPCs/Death.gd" id="9_4tomh"]
 [ext_resource type="Script" path="res://NPCs/AttackState/Idle.gd" id="10_p3r4n"]
 [ext_resource type="Script" path="res://NPCs/AttackState/Bite.gd" id="11_wmjtd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdh3w"]
+atlas = ExtResource("2_wdw3f")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qbrcu"]
 atlas = ExtResource("2_wdw3f")
@@ -31,6 +35,14 @@ region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5s2d0"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdh3w")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qbrcu")
@@ -61,7 +73,7 @@ wanderLength = 300
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5s2d0")
-frame_progress = 0.850535
+animation = &"death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -0.5)
