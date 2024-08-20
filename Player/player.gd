@@ -7,11 +7,11 @@ signal moved;
 
 @export var SPECIES_NAME = "Player"
 @export var ACCL = 50
-@export var MAX_BURST_FORCE = 100
-@export var ACCL_DIST_RATIO = 0.75;
+@export var MAX_BURST_FORCE = 120
+@export var ACCL_DIST_RATIO = 0.7;
 @export var MAX_ACCL_DIST = 800
 @export var MAX_SWIM_SPEED = 280
-@export var MAX_BURST_SPEED = 480;
+@export var MAX_BURST_SPEED = 500;
 @export var MAX_IDLE_SPEED = 8;
 @export var MAX_GRAV = 100
 @export var GRAVITY = 6

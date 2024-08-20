@@ -33,16 +33,16 @@ animations = [{
 }]
 
 [node name="Bag2" type="CharacterBody2D" groups=["lure"]]
+z_index = -5
 scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_aye48")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(0.291923, 0.688641, 0.566121, 1)
 sprite_frames = SubResource("SpriteFrames_580ma")
 autoplay = "default"
-frame_progress = 0.0118237
+frame_progress = 0.64014
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-10, -12, -9, 6, -7, 7, -5, 6, -4, 2, 5, 0, 7, 6, 10, 7, 11, -2, 11, -10, 4, -17, -3, -17)

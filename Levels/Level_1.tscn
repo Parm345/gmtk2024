@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://376hhjxnb2uc"]
+[gd_scene load_steps=21 format=3 uid="uid://376hhjxnb2uc"]
 
 [ext_resource type="PackedScene" uid="uid://bg4xrv8gigc24" path="res://Player/player.tscn" id="1"]
 [ext_resource type="Script" path="res://Levels/Level_1.gd" id="1_ktlp2"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b6ceyscc25yta" path="res://sprites/sheets/map_submarine.png" id="7_lc7y2"]
 [ext_resource type="Texture2D" uid="uid://cqnn2jyu6337g" path="res://sprites/sheets/map_radioactive1.png" id="8_arv8c"]
 [ext_resource type="Texture2D" uid="uid://dhafkaalitujg" path="res://sprites/sheets/icon_interact.png" id="9_gh3ti"]
+[ext_resource type="PackedScene" uid="uid://dssp47dq8yrw0" path="res://NPCs/Prey Animals/Heteroconga.tscn" id="9_qh00i"]
 [ext_resource type="PackedScene" uid="uid://g58o2rko20qb" path="res://Lures/Ziptie.tscn" id="9_ycoui"]
 [ext_resource type="PackedScene" uid="uid://b1a41sjumm1fk" path="res://Lures/Bag2.tscn" id="10_bv4wb"]
 
@@ -185,8 +186,63 @@ position = Vector2(859, 774)
 PRED_LEVEL = 1
 
 [node name="Shrimp2" parent="Organisms" instance=ExtResource("3_aq617")]
-position = Vector2(1094, 638)
+position = Vector2(3781, 295)
 PRED_LEVEL = 1
+
+[node name="Shrimp3" parent="Organisms" instance=ExtResource("3_aq617")]
+position = Vector2(3580, 377)
+PRED_LEVEL = 1
+
+[node name="Shrimp4" parent="Organisms" instance=ExtResource("3_aq617")]
+position = Vector2(3642, 308)
+PRED_LEVEL = 1
+
+[node name="Shrimp5" parent="Organisms" instance=ExtResource("3_aq617")]
+position = Vector2(3650, 397)
+PRED_LEVEL = 1
+
+[node name="Shrimp6" parent="Organisms" instance=ExtResource("3_aq617")]
+position = Vector2(4956, 222)
+PRED_LEVEL = 1
+
+[node name="Shrimp7" parent="Organisms" instance=ExtResource("3_aq617")]
+position = Vector2(5005, 237)
+PRED_LEVEL = 1
+
+[node name="Shrimp8" parent="Organisms" instance=ExtResource("3_aq617")]
+position = Vector2(5527, 263)
+PRED_LEVEL = 1
+
+[node name="Shrimp9" parent="Organisms" instance=ExtResource("3_aq617")]
+position = Vector2(6869, 283)
+PRED_LEVEL = 1
+
+[node name="Shrimp10" parent="Organisms" instance=ExtResource("3_aq617")]
+position = Vector2(6992, 433)
+PRED_LEVEL = 1
+
+[node name="Shrimp11" parent="Organisms" instance=ExtResource("3_aq617")]
+position = Vector2(7037, 298)
+PRED_LEVEL = 1
+
+[node name="Shrimp12" parent="Organisms" instance=ExtResource("3_aq617")]
+position = Vector2(7446, 305)
+PRED_LEVEL = 1
+
+[node name="Shrimp13" parent="Organisms" instance=ExtResource("3_aq617")]
+position = Vector2(7226, 651)
+PRED_LEVEL = 1
+
+[node name="Shrimp14" parent="Organisms" instance=ExtResource("3_aq617")]
+position = Vector2(7930, 541)
+PRED_LEVEL = 1
+
+[node name="Shrimp15" parent="Organisms" instance=ExtResource("3_aq617")]
+position = Vector2(8004, 691)
+PRED_LEVEL = 1
+
+[node name="Heteroconga" parent="Organisms" instance=ExtResource("9_qh00i")]
+position = Vector2(629, 3282)
 
 [node name="Lures" type="Node2D" parent="."]
 

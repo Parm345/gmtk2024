@@ -151,12 +151,14 @@ script = ExtResource("8_kprxb")
 script = ExtResource("9_4tomh")
 
 [node name="VisionCone" type="Area2D" parent="."]
+visible = false
 monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionCone"]
 polygon = PackedVector2Array(0, 0, 64, 64, 96, 40, 96, -48, 64, -64)
 
 [node name="LureVision" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 2
 monitorable = false
