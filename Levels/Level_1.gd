@@ -76,6 +76,8 @@ func _on_deep_blue_body_entered(body):
 func _on_deep_blue_body_exited(body):
 	if body != player:
 		return;
+	if is_queued_for_deletion():
+		return;
 	game.region_ost = "";
 
 func _on_decomposition_body_entered(body):
@@ -88,6 +90,8 @@ func _on_decomposition_body_entered(body):
 
 func _on_decomposition_body_exited(body):
 	if body != player:
+		return;
+	if is_queued_for_deletion():
 		return;
 	game.region_ost = "";
 
@@ -102,6 +106,8 @@ func _on_deep_think_body_entered(body):
 func _on_deep_think_body_exited(body):
 	if body != player:
 		return;
+	if is_queued_for_deletion():
+		return;
 	game.region_ost = "";
 
 func _on_archaeology_body_entered(body):
@@ -115,6 +121,8 @@ func _on_archaeology_body_entered(body):
 func _on_archaeology_body_exited(body):
 	if body != player:
 		return;
+	if is_queued_for_deletion():
+		return;
 	game.region_ost = "";
 
 func _on_reminiscence_body_entered(body):
@@ -127,6 +135,8 @@ func _on_reminiscence_body_entered(body):
 
 func _on_reminiscence_body_exited(body):
 	if body != player:
+		return;
+	if is_queued_for_deletion():
 		return;
 	game.region_ost = "";
 
