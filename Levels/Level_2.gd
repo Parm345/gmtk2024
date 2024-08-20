@@ -14,7 +14,7 @@ func _ready():
 	game.ost_prob_on_timeout = 0.3;
 	
 	player.global_position = game.saved_player_positions[game.current_level_index];
-	tracking_cam.global_position = player.global_position;
+	tracking_cam.global_position = player.global_position.clamp(tracking_cam.min_pos, tracking_cam.max_pos);
 
 func _on_ocean_body_entered(body):
 	if body != player:

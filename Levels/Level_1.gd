@@ -26,7 +26,7 @@ func _ready():
 	game.sounds.get_node("waves").finished.connect(_on_waves_finished);
 	
 	player.global_position = game.saved_player_positions[game.current_level_index];
-	tracking_cam.global_position = player.global_position;
+	tracking_cam.global_position = player.global_position.clamp(tracking_cam.min_pos, tracking_cam.max_pos);
 
 func _process(_delta):
 	#update wave volume
