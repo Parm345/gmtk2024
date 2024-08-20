@@ -12,6 +12,7 @@ extends Node2D
 func _ready():
 	game.play_sound("waves");
 	game.sounds.get_node("waves").finished.connect(_on_waves_finished);
+	$Player.waterLevel = $WaterLevel
 
 func _process(_delta):
 	#update wave volume

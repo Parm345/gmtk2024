@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bg4xrv8gigc24"]
+[gd_scene load_steps=43 format=3 uid="uid://bg4xrv8gigc24"]
 
 [ext_resource type="Script" path="res://Objects/FSM/FiniteStateMachine.gd" id="1"]
 [ext_resource type="Script" path="res://Player/player.gd" id="2"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Player/Scripts/Death.gd" id="7_405ss"]
 [ext_resource type="Script" path="res://Player/AttackStates/Idle.gd" id="8_25c8q"]
 [ext_resource type="Script" path="res://Player/AttackStates/Bite.gd" id="9_trvwc"]
+[ext_resource type="Script" path="res://Player/Jump.gd" id="12_l8dej"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xw0lg"]
 atlas = ExtResource("2_4gtnf")
@@ -232,8 +233,8 @@ script = ExtResource("2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4vdmn")
-animation = &"accel"
-frame_progress = 0.447976
+animation = &"jump"
+frame_progress = 0.343176
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(0, -7, 2, -7, 6, -4, 9, -4, 14, -1, 14, 3, 9, 6, 4, 6, 3, 7, 1, 7, 1, 6, -3, 6, -6, 5, -8, 4, -10, 4, -12, 6, -13, 6, -13, 4, -11, 2, -14, -4, -14, -6, -13, -6, -11, -5, -7, -1, -4, -4, 1, -5)
@@ -256,6 +257,9 @@ one_shot = true
 
 [node name="Death" type="Node2D" parent="FSM"]
 script = ExtResource("7_405ss")
+
+[node name="Jump" type="Node2D" parent="FSM"]
+script = ExtResource("12_l8dej")
 
 [node name="BurstCoolDown" type="Timer" parent="."]
 wait_time = 0.4

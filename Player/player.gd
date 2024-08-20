@@ -9,6 +9,8 @@ signal moved;
 @export var ACCL = 50
 @export var BURST_FORCE = 1000
 @export var MAX_SPEED = 200
+@export var MAX_GRAV = 100
+@export var GRAVITY = 5
 @export var BITE_STRENGTH = 10
 @export var FRICTION_FACTOR_WATER = 0.98
 @export var FRICTION_FACTOR_BRAKE = 0.6
@@ -35,6 +37,10 @@ var nearbyLure:Lure = null
 var equipedLure:Lure = null
 
 var prevAnim:String = ""
+
+var waterLevel:Marker2D = null
+var isAboveWater:bool = false
+var useExitBurstSpeed = false
 
 @onready var anim:AnimatedSprite2D = $AnimatedSprite2D;
 
@@ -63,7 +69,7 @@ func _physics_process(_delta):
 	
 	mouseDirection = get_global_mouse_position() - global_position;
 	lensqToMouse = mouseDirection.length_squared();
-	if !isBursting and Input.is_action_pressed("move"):
+	if !isBursting and Input.is_action_pressed("move") and not isAboveWater:
 		if lensqToMouse >= MIN_LENSQ_TO_MOUSE_FOR_ACCL:
 			var mouseDirectionNorm:Vector2 = mouseDirection.normalized();
 			var oscillationDirNorm:Vector2 = Vector2(-mouseDirectionNorm.y, mouseDirectionNorm.x);
@@ -72,10 +78,22 @@ func _physics_process(_delta):
 		elif lensqToMouse < MAX_LENSQ_TO_MOUSE_FOR_BRAKE:
 			velocity *= FRICTION_FACTOR_BRAKE;
 	
+	pass
+	
+	if waterLevel != null:
+		if global_position.y < waterLevel.global_position.y and not isBursting:
+			isAboveWater = true 
+			$FSM.overrideState($FSM.states.Jump)
+		else:
+			isAboveWater = false
+	
 	if $FSM.curState != $FSM.states.Burst:
 		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
-		velocity.y = clamp(velocity.y, -MAX_SPEED, MAX_SPEED)
-	
+		if not isAboveWater:
+			velocity.y = clamp(velocity.y, -MAX_SPEED, MAX_SPEED)
+		else:
+			velocity.y = clamp(velocity.y, -MAX_GRAV, MAX_GRAV)
+			
 	if velocity.length_squared() > 0:
 		moved.emit();
 	move_and_slide()
@@ -100,7 +118,7 @@ func _input(event):
 
 #put burst here so button presses don't trigger it
 func _unhandled_input(event):
-	if event.is_action_pressed("burst") and isBurstEnabled:
+	if event.is_action_pressed("burst") and isBurstEnabled and not isAboveWater:
 		burstDirection = (get_global_mouse_position() - global_position).normalized()
 		isBursting = true
 		isBurstEnabled = false

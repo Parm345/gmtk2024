@@ -45,3 +45,6 @@ PRED_LEVEL = 1
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_yxokp")
+
+[node name="WaterLevel" type="Marker2D" parent="."]
+position = Vector2(256, 204)
