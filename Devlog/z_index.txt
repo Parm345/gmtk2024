@@ -3,6 +3,7 @@
 90	transition overlay
 
 88	home buttons
+86	interact hint
 
 80	foreground plant
 
@@ -22,6 +23,8 @@
 
 -13	background pillar
 
+-15	background submarine-attached radiation
+-16	background submarine
 -17	background pipe-attached meter
 -18	background wall-attached pipe
 -19	background wall-attached plant

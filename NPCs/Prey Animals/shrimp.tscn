@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://NPCs/npc_class.gd" id="1_pjalo"]
 [ext_resource type="Script" path="res://Objects/FSM/FiniteStateMachine.gd" id="2_6rslr"]
-[ext_resource type="Texture2D" uid="uid://dfgalq66x8220" path="res://sprites/sheets/npc_shrimp_swim.png" id="2_wdw3f"]
+[ext_resource type="Texture2D" uid="uid://61nqwfrb46u5" path="res://sprites/sheets/npc_shrimp_swim.png" id="2_wdw3f"]
 [ext_resource type="Script" path="res://NPCs/NPC States/Idle.gd" id="3_x6j04"]
 [ext_resource type="Script" path="res://NPCs/Wander.gd" id="4_4g0nq"]
 [ext_resource type="Script" path="res://NPCs/Search.gd" id="5_5hlgh"]
@@ -68,6 +68,7 @@ size = Vector2(14, 13)
 size = Vector2(5, 13)
 
 [node name="Shrimp" type="CharacterBody2D" groups=["npc_prey"]]
+z_index = 49
 script = ExtResource("1_pjalo")
 wanderLength = 300
 

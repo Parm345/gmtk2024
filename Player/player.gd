@@ -7,12 +7,17 @@ signal moved;
 
 @export var SPECIES_NAME = "Player"
 @export var ACCL = 50
-@export var BURST_FORCE = 1000
-@export var MAX_SPEED = 200
+@export var MAX_BURST_FORCE = 100
+@export var ACCL_DIST_RATIO = 0.75;
+@export var MAX_ACCL_DIST = 800
+@export var MAX_SPEED = 280
+@export var MAX_BURST_SPEED = 480;
+@export var MAX_IDLE_SPEED = 8;
 @export var MAX_GRAV = 100
 @export var GRAVITY = 5
 @export var BITE_STRENGTH = 10
 @export var FRICTION_FACTOR_WATER = 0.98
+@export var FRICTION_FACTOR_BURST = 0.94;
 @export var FRICTION_FACTOR_BRAKE = 0.6
 @export var MAX_LENSQ_TO_MOUSE_FOR_BRAKE = 64 #exclusive
 @export var MIN_LENSQ_TO_MOUSE_FOR_ACCL = 64 #inclusive
@@ -26,7 +31,11 @@ var isDead = false
 
 var isBurstEnabled = true
 var isBursting = false
-var burstDirection:Vector2 = Vector2()
+var burstDirection:Vector2;
+var burstStartPos:Vector2;
+var burstDistance:float;
+var burstDistanceAccl:float;
+var burstDistanceTotal:float;
 
 var isAllowedToBite:bool = false
 var preyNodesInRange = []
@@ -64,6 +73,10 @@ func _process(_delta):
 		$AnimatedSprite2D.flip_v = true
 
 func _physics_process(_delta):
+	#burstDistance
+	if isBursting:
+		burstDistance = (global_position - burstStartPos).length()
+	
 	#friction
 	velocity *= FRICTION_FACTOR_WATER;
 	
@@ -81,18 +94,24 @@ func _physics_process(_delta):
 	pass
 	
 	if waterLevel != null:
-		if global_position.y < waterLevel.global_position.y and not isBursting:
+		if global_position.y < waterLevel.global_position.y:
 			isAboveWater = true 
 			$FSM.overrideState($FSM.states.Jump)
 		else:
 			isAboveWater = false
 	
+	#clamp speed
+	var speed:float = velocity.length();
 	if $FSM.curState != $FSM.states.Burst:
-		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
-		if not isAboveWater:
-			velocity.y = clamp(velocity.y, -MAX_SPEED, MAX_SPEED)
-		else:
-			velocity.y = clamp(velocity.y, -MAX_GRAV, MAX_GRAV)
+		if speed > MAX_SPEED:
+			velocity *= MAX_SPEED/speed;
+		#if not isAboveWater:
+			#velocity.y = clamp(velocity.y, -MAX_SPEED, MAX_SPEED)
+		#else:
+			#velocity.y = clamp(velocity.y, -MAX_GRAV, MAX_GRAV)
+	else:
+		if speed > MAX_BURST_SPEED:
+			velocity *= MAX_BURST_SPEED/speed;
 			
 	if velocity.length_squared() > 0:
 		moved.emit();
@@ -100,10 +119,6 @@ func _physics_process(_delta):
 
 func _input(event):
 	if !isBursting:
-		if event.is_action_released("left") or event.is_action_released("right"):
-			velocity.x = 0
-		if event.is_action_released("up") or event.is_action_released("down"):
-			velocity.y = 0
 		if event.is_action_pressed("bite"):
 			prevAnim = $AnimatedSprite2D.animation
 			for prey in preyNodesInRange:
@@ -119,8 +134,13 @@ func _input(event):
 #put burst here so button presses don't trigger it
 func _unhandled_input(event):
 	if event.is_action_pressed("burst") and isBurstEnabled and not isAboveWater:
-		burstDirection = (get_global_mouse_position() - global_position).normalized()
+		burstDirection = mouseDirection.normalized()
 		isBursting = true
+		burstStartPos = global_position;
+		burstDistance = 0
+		burstDistanceAccl = min(mouseDirection.length() * ACCL_DIST_RATIO, MAX_ACCL_DIST);
+		burstDistanceTotal = mouseDirection.length();
+		print(burstDistanceTotal)
 		isBurstEnabled = false
 
 func playAnimation(animationName: String) -> void:

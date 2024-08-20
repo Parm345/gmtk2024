@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bajgvdnf68nm3" path="res://sprites/sheets/map_tiles_sky.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://nwxj0rr0alek" path="res://sprites/sheets/map_tiles_submarine.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://4x0o43mngqgl" path="res://sprites/sheets/map_tiles_water.png" id="6_24frd"]
-[ext_resource type="Texture2D" uid="uid://potlmsyes7b8" path="res://sprites/sheets/icon_achievements.png" id="7_1ygqx"]
+[ext_resource type="Texture2D" uid="uid://bwj3d057v0lgi" path="res://sprites/sheets/icon_achievements.png" id="7_1ygqx"]
 [ext_resource type="Texture2D" uid="uid://rielxan7hshb" path="res://sprites/sheets/map_sewer_discharge.png" id="7_8efgt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pi4qa"]

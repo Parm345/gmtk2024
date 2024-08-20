@@ -4,7 +4,6 @@ var isBursting = false
 
 # Called when the actor (FSM controller parent) enters the state
 func enter():
-	actor.velocity = Vector2()
 	actor.anim.speed_scale = 0.5;
 	actor.playAnimation("swim")
 	if get_parent().prevState == states.Burst:
@@ -24,7 +23,7 @@ func inProcess(_delta):
 	pass
 
 func changeParentState():
-	if actor.velocity.length_squared() > 0:
+	if actor.velocity.length_squared() > actor.MAX_IDLE_SPEED:
 		return states.Swim
 	if actor.isBursting and not actor.isAboveWater:
 		return states.Burst

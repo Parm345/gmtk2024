@@ -9,4 +9,4 @@ extends Node2D
 
 
 func _ready():
-	game.region_ost = "ost_deep_think";
+	game.region_ost = "ost_archaeology";

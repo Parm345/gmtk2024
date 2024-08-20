@@ -8,6 +8,8 @@ const TRACKING_CAM_TRANSITION_TIME:float = 1.28;
 const LEVEL_COUNT:int = 4;
 const VIEWPORT_SIZE:Vector2i = Vector2i(1280, 720);
 const TILE_WIDTH:int = 16;
+const OST_PROB_ON_TIMEOUT = 0.05;
+const SFX_WAVES_DB_OFFSET = -6;
 
 var levels = [];
 var current_level_index:int = 0;
@@ -16,6 +18,8 @@ var paused:bool = false;
 
 var ost_bus_index:int;
 var sfx_bus_index:int;
+var region_ost:String = ""; # set this for continued, random-start playing; should init in Level._ready()
+var curr_ost:String = ""; # name of current ost playing, empty if none
 
 # NPC navigation stuff
 var nav_map
@@ -42,7 +46,7 @@ func _ready():
 	#levels
 	for i in range(LEVEL_COUNT):
 		levels.append(load("res://Levels/Level_"+str(i)+".tscn"));
-	#change_level_faded(current_level_index);
+	
 	add_level(current_level_index);
 
 #defer this until previous level has been freed
@@ -87,7 +91,18 @@ func _on_animation_player_animation_finished(anim_name):
 		change_level(current_level_index);
 		fader.play("fade_out_fish");
 
-func play_sound(s:String):
+func play_sound(s:String, force_ost:bool):
+	#check and update curr_ost
+	if s.substr(0, 4) == "ost_":
+		if curr_ost == s:
+			return;
+		if curr_ost:
+			if force_ost:
+				sounds.get_node(curr_ost).stop();
+			else:
+				return;
+		curr_ost = s;
+	
 	var audio_player:AudioStreamPlayer = sounds.get_node(s);
 	audio_player.play();
 
@@ -133,3 +148,22 @@ func _on_ost_value_changed(value):
 	
 func _on_sfx_value_changed(value):
 	AudioServer.set_bus_volume_db(sfx_bus_index, linear_to_db(value));
+
+func _on_ost_timer_timeout():
+	if region_ost and randf() < OST_PROB_ON_TIMEOUT:
+		play_sound(region_ost, false);
+
+func _on_ost_deep_blue_finished():
+	curr_ost = "";
+
+func _on_ost_deep_think_finished():
+	curr_ost = "";
+
+func _on_ost_decomposition_finished():
+	curr_ost = "";
+
+func _on_ost_archaeology_finished():
+	curr_ost = "";
+
+func _on_ost_reminiscence_finished():
+	curr_ost = "";

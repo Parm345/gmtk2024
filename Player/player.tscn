@@ -229,6 +229,7 @@ animations = [{
 size = Vector2(6.5, 14)
 
 [node name="Player" type="CharacterBody2D" groups=["prey"]]
+z_index = 50
 script = ExtResource("2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -250,10 +251,6 @@ script = ExtResource("4")
 
 [node name="Burst" type="Node2D" parent="FSM"]
 script = ExtResource("5")
-
-[node name="BurstTimer" type="Timer" parent="FSM/Burst"]
-wait_time = 0.2
-one_shot = true
 
 [node name="Death" type="Node2D" parent="FSM"]
 script = ExtResource("7_405ss")
@@ -289,7 +286,6 @@ shape = SubResource("RectangleShape2D_uxdxo")
 [node name="LureEquipSpot" type="Marker2D" parent="."]
 position = Vector2(21, 0)
 
-[connection signal="timeout" from="FSM/Burst/BurstTimer" to="FSM/Burst" method="_on_BurstTimer_timeout"]
 [connection signal="timeout" from="BurstCoolDown" to="." method="_on_BurstCoolDown_timeout"]
 [connection signal="body_entered" from="BiteBox" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="BiteBox" to="." method="_on_area_2d_body_exited"]

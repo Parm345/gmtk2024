@@ -4,7 +4,7 @@ var prevAnim:String = ""
 
 # Called when the parent enters the state
 func enter():
-	pass
+	print("ENTER BITE")
 
 # Called when parent leaves the state, most likely not necessary 
 func exit():

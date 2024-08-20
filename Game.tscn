@@ -1,15 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://cxd0g21s36l18"]
+[gd_scene load_steps=20 format=3 uid="uid://cxd0g21s36l18"]
 
 [ext_resource type="Script" path="res://game.gd" id="1"]
-[ext_resource type="AudioStream" uid="uid://b7e56l81o655e" path="res://sounds/sfx/waves.mp3" id="2_2ndbh"]
+[ext_resource type="AudioStream" uid="uid://dsid8recbau6c" path="res://sounds/sfx/waves.mp3" id="2_2ndbh"]
 [ext_resource type="PackedScene" uid="uid://135ebxe2kw4h" path="res://LoadScreen/load_screen.tscn" id="3_688pr"]
-[ext_resource type="Texture2D" uid="uid://bnlnu2agwbou5" path="res://sprites/sheets/icon_button3_normal.png" id="3_nyoek"]
+[ext_resource type="Texture2D" uid="uid://c1q173elgf40c" path="res://sprites/sheets/icon_button3_normal.png" id="3_nyoek"]
 [ext_resource type="Theme" uid="uid://dox8k0rlrytam" path="res://Themes/main_theme.tres" id="3_yh7yr"]
-[ext_resource type="Texture2D" uid="uid://cd1mhukbrvknm" path="res://sprites/sheets/icon_button3_pressed.png" id="4_edc25"]
-[ext_resource type="Texture2D" uid="uid://qx16586vqvxy" path="res://sprites/sheets/icon_button3_hover.png" id="5_2c08c"]
-[ext_resource type="Texture2D" uid="uid://j2vx8jb5v7x2" path="res://sprites/sheets/icon_button4_normal.png" id="7_kpbut"]
-[ext_resource type="Texture2D" uid="uid://nde5eb3j70fb" path="res://sprites/sheets/icon_button4_pressed.png" id="8_140k8"]
-[ext_resource type="Texture2D" uid="uid://bubhr45qx611q" path="res://sprites/sheets/icon_button4_hover.png" id="9_qkkyc"]
+[ext_resource type="Texture2D" uid="uid://dd5x6xtl6glaq" path="res://sprites/sheets/icon_button3_pressed.png" id="4_edc25"]
+[ext_resource type="Texture2D" uid="uid://xlvse0p582ls" path="res://sprites/sheets/icon_button3_hover.png" id="5_2c08c"]
+[ext_resource type="Texture2D" uid="uid://cfcu0awo3mw1e" path="res://sprites/sheets/icon_button4_normal.png" id="7_kpbut"]
+[ext_resource type="Texture2D" uid="uid://078k6x7jkstv" path="res://sprites/sheets/icon_button4_pressed.png" id="8_140k8"]
+[ext_resource type="Texture2D" uid="uid://wsg8wfs2vvqy" path="res://sprites/sheets/icon_button4_hover.png" id="9_qkkyc"]
+[ext_resource type="AudioStream" uid="uid://qed0ec26g36x" path="res://sounds/music/ost_deep_blue.mp3" id="11_3wwxd"]
+[ext_resource type="AudioStream" uid="uid://bsi7jwcbj303g" path="res://sounds/music/ost_deep_think.mp3" id="12_l8qv7"]
+[ext_resource type="AudioStream" uid="uid://dt8pbttq1rnm" path="res://sounds/music/ost_decomposition.mp3" id="13_88ahb"]
+[ext_resource type="AudioStream" uid="uid://slfg5jqloiab" path="res://sounds/music/ost_archaeology.mp3" id="14_1hjqy"]
+[ext_resource type="AudioStream" uid="uid://dyiv7ba8b362x" path="res://sounds/music/ost_reminiscence.mp3" id="15_es4t4"]
 
 [sub_resource type="Animation" id="Animation_sow86"]
 length = 0.001
@@ -210,6 +215,30 @@ stretch_mode = 4
 stream = ExtResource("2_2ndbh")
 bus = &"sfx"
 
+[node name="ost_deep_blue" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("11_3wwxd")
+bus = &"ost"
+
+[node name="ost_deep_think" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("12_l8qv7")
+bus = &"ost"
+
+[node name="ost_decomposition" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("13_88ahb")
+bus = &"ost"
+
+[node name="ost_archaeology" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("14_1hjqy")
+bus = &"ost"
+
+[node name="ost_reminiscence" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("15_es4t4")
+bus = &"ost"
+
+[node name="OSTTimer" type="Timer" parent="."]
+wait_time = 2.7
+autostart = true
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="GUI/PauseMenu/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="GUI/PauseMenu/MarginContainer/VBoxContainer/Home" to="." method="_on_home_pressed"]
@@ -218,3 +247,9 @@ bus = &"sfx"
 [connection signal="value_changed" from="GUI/PauseMenu/MarginContainer/VBoxContainer/HBoxContainer2/SFX" to="." method="_on_sfx_value_changed"]
 [connection signal="pressed" from="GUI/Buttons/HBoxContainer/Pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="GUI/Buttons/HBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="finished" from="Sounds/ost_deep_blue" to="." method="_on_ost_deep_blue_finished"]
+[connection signal="finished" from="Sounds/ost_deep_think" to="." method="_on_ost_deep_think_finished"]
+[connection signal="finished" from="Sounds/ost_decomposition" to="." method="_on_ost_decomposition_finished"]
+[connection signal="finished" from="Sounds/ost_archaeology" to="." method="_on_ost_archaeology_finished"]
+[connection signal="finished" from="Sounds/ost_reminiscence" to="." method="_on_ost_reminiscence_finished"]
+[connection signal="timeout" from="OSTTimer" to="." method="_on_ost_timer_timeout"]
