@@ -183,6 +183,8 @@ func _on_sfx_value_changed(value):
 	AudioServer.set_bus_volume_db(sfx_bus_index, linear_to_db(value));
 
 func _on_ost_timer_timeout():
+	if current_level_index == 2:
+		print(curr_ost, ", ", region_ost);
 	if region_ost and randf() < ost_prob_on_timeout:
 		play_sound(region_ost, false);
 

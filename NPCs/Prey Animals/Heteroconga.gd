@@ -6,7 +6,7 @@ var is_scared:bool = false;
 func _ready():
 	$FSM.setState($FSM.states.Bask)
 
-func _on_area_2d_body_entered(body):
+func _on_area_2d_body_entered(_body):
 	is_scared = true;
 	$CopeTimer.start();
 

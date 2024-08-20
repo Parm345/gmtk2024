@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b1a41sjumm1fk"]
 
-[ext_resource type="Script" path="res://Lures/lure.gd" id="1_aye48"]
+[ext_resource type="Script" path="res://Lures/Bag2.gd" id="1_bxs16"]
 [ext_resource type="Texture2D" uid="uid://dvdsvelolpopl" path="res://sprites/sheets/garbage_bag2.png" id="2_10y5l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_roteq"]
@@ -37,9 +37,9 @@ z_index = -5
 scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("1_aye48")
+script = ExtResource("1_bxs16")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_580ma")
 autoplay = "default"
 frame_progress = 0.64014
