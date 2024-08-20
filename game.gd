@@ -10,6 +10,20 @@ const VIEWPORT_SIZE:Vector2i = Vector2i(1280, 720);
 const TILE_WIDTH:int = 64;
 const SFX_WAVES_DB_OFFSET = -6;
 
+enum LayerId {
+	SKY = 0,
+	BACK_BACK_WALL,
+	BACK_WALL,
+	BACK_WALL_ATTACHED_PLANT,
+	BACK_WALL_ATTACHED_PIPE,
+	BACK_PIPE_ATTACHED_METER,
+	BACK_PILLAR,
+	BACK_PLANT,
+	WATER,
+	COLLIDABLE_DECOR,
+	FORE_PLANT
+}
+
 var levels = [];
 var current_level_index:int = 0;
 var current_level:Node2D;

@@ -22,8 +22,9 @@ tracking_cam = NodePath("Camera2D")
 max_pos_t = Vector2(116, 44)
 metadata/_edit_lock_ = true
 
-[node name="Player" parent="." instance=ExtResource("2_w5p6q")]
+[node name="Player" parent="." node_paths=PackedStringArray("map") instance=ExtResource("2_w5p6q")]
 position = Vector2(4827, 1326)
+map = NodePath("../sub")
 metadata/_edit_lock_ = true
 
 [node name="sub" parent="." instance=ExtResource("2_r2ryt")]

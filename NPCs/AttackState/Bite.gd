@@ -2,12 +2,12 @@ extends State
 
 # Called when the parent enters the state
 func enter():
-	print('enter bite')
+	#print('enter bite')
 	$BiteTimer.start()
 
 # Called when parent leaves the state, most likely not necessary 
 func exit():
-	print("exit bite");
+	#print("exit bite");
 	$BiteTimer.stop()
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame. Run in FSM _physics_process.

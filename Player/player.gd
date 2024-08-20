@@ -26,6 +26,7 @@ signal moved;
 @export var OSC_DIR_DAMPENING = 0.05
 @export var AIR_TIME_UNTIL_DAMAGE = 6;
 @export var health = 12
+@export var map:TileMap;
 
 var mouseDirection:Vector2;
 var lensqToMouse:float;
@@ -49,10 +50,10 @@ var equipedLure:Lure = null
 
 var prevAnim:String = ""
 
-var waterLevel:Marker2D = null
 var isAboveWater:bool = false
 var useExitBurstSpeed = false
 
+@onready var game:Node2D = $"/root/Game"
 @onready var anim:AnimatedSprite2D = $AnimatedSprite2D;
 @onready var air_timer:Timer = $AirTimer;
 
@@ -96,11 +97,11 @@ func _physics_process(_delta):
 	
 	pass
 	
-	if waterLevel != null:
-		if global_position.y < waterLevel.global_position.y:
-			isAboveWater = true
-		else:
-			isAboveWater = false
+	var pos_t:Vector2i = map.local_to_map(map.to_local(global_position));
+	if map.get_cell_atlas_coords(game.LayerId.WATER, pos_t) != -Vector2i.ONE:
+		isAboveWater = false;
+	else:
+		isAboveWater = true;
 	
 	#clamp speed
 	var speed:float = velocity.length();

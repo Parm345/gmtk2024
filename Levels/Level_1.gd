@@ -25,7 +25,6 @@ func _ready():
 	game.play_sound("waves", false);
 	game.sounds.get_node("waves").finished.connect(_on_waves_finished);
 	
-	player.waterLevel = $WaterLevel
 	player.global_position = game.saved_player_positions[game.current_level_index];
 	tracking_cam.global_position = player.global_position;
 
