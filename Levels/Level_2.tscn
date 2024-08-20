@@ -1,10 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://bjmcadnyfn783"]
+[gd_scene load_steps=8 format=3 uid="uid://bjmcadnyfn783"]
 
 [ext_resource type="Script" path="res://Levels/Level_2.gd" id="1_fpqyi"]
 [ext_resource type="PackedScene" uid="uid://btwvoh8wv6gs5" path="res://Levels/sub.tscn" id="2_r2ryt"]
 [ext_resource type="PackedScene" uid="uid://bg4xrv8gigc24" path="res://Player/player.tscn" id="2_w5p6q"]
 [ext_resource type="Texture2D" uid="uid://dhafkaalitujg" path="res://sprites/sheets/icon_interact.png" id="4_6ffr7"]
 [ext_resource type="Script" path="res://Camera/TrackingCam.gd" id="4_18oov"]
+
+[sub_resource type="Gradient" id="Gradient_n0gjw"]
+colors = PackedColorArray(0, 0.00784314, 0.0392157, 0.705882, 0, 0.00784314, 0.0392157, 0.705882)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tbg1f"]
+gradient = SubResource("Gradient_n0gjw")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
 
 [node name="Level 2" type="Node2D" node_paths=PackedStringArray("player", "map")]
 script = ExtResource("1_fpqyi")
@@ -21,7 +29,7 @@ metadata/_edit_lock_ = true
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player", "level")]
-position = Vector2(640, 360)
+position = Vector2(4827, 1327)
 script = ExtResource("4_18oov")
 player = NodePath("../Player")
 level = NodePath("..")
@@ -38,6 +46,14 @@ z_index = 86
 position = Vector2(4830, 1260)
 scale = Vector2(4, 4)
 texture = ExtResource("4_6ffr7")
+
+[node name="WaterGradient2" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.941176)
+z_index = 82
+offset_right = 7488.0
+offset_bottom = 2880.0
+texture = SubResource("GradientTexture2D_tbg1f")
+metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="Ocean" to="." method="_on_ocean_body_entered"]
 [connection signal="body_exited" from="Ocean" to="." method="_on_ocean_body_exited"]

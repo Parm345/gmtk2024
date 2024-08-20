@@ -53,11 +53,11 @@ gradient = SubResource("Gradient_2buwe")
 fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0)
 
-[sub_resource type="Gradient" id="Gradient_n0gjw"]
+[sub_resource type="Gradient" id="Gradient_5uun2"]
 colors = PackedColorArray(0, 0.00784314, 0.0392157, 0.705882, 0, 0.00784314, 0.0392157, 0.705882)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_clvbl"]
-gradient = SubResource("Gradient_n0gjw")
+gradient = SubResource("Gradient_5uun2")
 fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0)
 
@@ -172,6 +172,7 @@ offset_top = 208.0
 offset_right = 12800.0
 offset_bottom = 7168.0
 texture = SubResource("GradientTexture2D_rf5kc")
+metadata/_edit_lock_ = true
 
 [node name="WaterGradient2" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0.941176)
@@ -180,6 +181,7 @@ offset_top = 7168.0
 offset_right = 12800.0
 offset_bottom = 10240.0
 texture = SubResource("GradientTexture2D_clvbl")
+metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="OSTRegions/DeepBlue" to="." method="_on_deep_blue_body_entered"]
 [connection signal="body_exited" from="OSTRegions/DeepBlue" to="." method="_on_deep_blue_body_exited"]
