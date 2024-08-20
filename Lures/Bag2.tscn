@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://b1a41sjumm1fk"]
+
+[ext_resource type="Script" path="res://Lures/lure.gd" id="1_aye48"]
+[ext_resource type="Texture2D" uid="uid://dvdsvelolpopl" path="res://sprites/sheets/garbage_bag2.png" id="2_10y5l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_roteq"]
+atlas = ExtResource("2_10y5l")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdb8l"]
+atlas = ExtResource("2_10y5l")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_br262"]
+atlas = ExtResource("2_10y5l")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_580ma"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_roteq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdb8l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_br262")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="Bag2" type="CharacterBody2D" groups=["lure"]]
+scale = Vector2(2, 2)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_aye48")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.291923, 0.688641, 0.566121, 1)
+sprite_frames = SubResource("SpriteFrames_580ma")
+autoplay = "default"
+frame_progress = 0.0118237
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-10, -12, -9, 6, -7, 7, -5, 6, -4, 2, 5, 0, 7, 6, 10, 7, 11, -2, 11, -10, 4, -17, -3, -17)

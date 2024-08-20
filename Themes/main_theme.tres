@@ -1,4 +1,7 @@
-[gd_resource type="Theme" format=3 uid="uid://dox8k0rlrytam"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dox8k0rlrytam"]
+
+[ext_resource type="FontFile" uid="uid://h1kgof3v7y0" path="res://fonts/PressStart2P-vaV7.ttf" id="1_hpopb"]
 
 [resource]
+default_font = ExtResource("1_hpopb")
 HBoxContainer/constants/separation = 0

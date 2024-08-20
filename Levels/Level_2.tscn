@@ -57,5 +57,7 @@ offset_bottom = 2880.0
 texture = SubResource("GradientTexture2D_tbg1f")
 metadata/_edit_lock_ = true
 
+[node name="Organisms" type="Node2D" parent="."]
+
 [connection signal="body_entered" from="Ocean" to="." method="_on_ocean_body_entered"]
 [connection signal="body_exited" from="Ocean" to="." method="_on_ocean_body_exited"]

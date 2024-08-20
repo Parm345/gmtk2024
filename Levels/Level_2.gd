@@ -8,6 +8,8 @@ extends Node2D
 @export var min_pos_t:Vector2 = Vector2.ZERO;
 @export var max_pos_t:Vector2 = Vector2.ZERO;
 
+var organism_count:int;
+
 
 func _ready():
 	game.region_ost = "ost_deep_think";
@@ -15,6 +17,16 @@ func _ready():
 	
 	player.global_position = game.saved_player_positions[game.current_level_index];
 	tracking_cam.global_position = player.global_position.clamp(tracking_cam.min_pos, tracking_cam.max_pos);
+
+	set_organism_count(1 + $Organisms.get_child_count());
+
+func set_organism_count(n:int):
+	organism_count = n;
+	game.update_organism_count(n);
+
+func change_organism_count(n:int):
+	organism_count += n;
+	game.update_organism_count(organism_count);
 
 func _on_ocean_body_entered(body):
 	if body != player:

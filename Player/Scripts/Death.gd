@@ -1,9 +1,14 @@
 extends State
 
+@onready var game:Node2D = $"/root/Game";
+
+
 # Called when the parent enters the state
 func enter():
 	actor.get_node("AnimatedSprite2D").set_animation("death")
-	actor.get_node("AnimatedSprite2D").play() 
+	actor.get_node("AnimatedSprite2D").play()
+	
+	game.current_level.change_organism_count(-1);
 
 # Called when parent leaves the state, most likely not necessary 
 func exit():

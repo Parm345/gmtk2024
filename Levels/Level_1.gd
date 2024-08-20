@@ -17,6 +17,8 @@ var has_ost_played:Dictionary = {
 	"ost_archaeology" : false,
 }
 
+var organism_count:int;
+
 
 func _ready():
 	game.region_ost = "";
@@ -27,6 +29,16 @@ func _ready():
 	
 	player.global_position = game.saved_player_positions[game.current_level_index];
 	tracking_cam.global_position = player.global_position.clamp(tracking_cam.min_pos, tracking_cam.max_pos);
+	
+	set_organism_count(1 + $Organisms.get_child_count());
+
+func set_organism_count(n:int):
+	organism_count = n;
+	game.update_organism_count(n);
+
+func change_organism_count(n:int):
+	organism_count += n;
+	game.update_organism_count(organism_count);
 
 func _process(_delta):
 	#update wave volume

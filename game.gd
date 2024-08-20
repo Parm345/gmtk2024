@@ -54,6 +54,8 @@ var nav_map
 @onready var pause_button:TextureButton = $"GUI/Buttons/HBoxContainer/Pause";
 @onready var ost_slider:HSlider = $"GUI/PauseMenu/MarginContainer/VBoxContainer/HBoxContainer/OST";
 @onready var sfx_slider:HSlider = $"GUI/PauseMenu/MarginContainer/VBoxContainer/HBoxContainer2/SFX";
+@onready var labels:MarginContainer = $"GUI/Labels";
+@onready var org_counter:Label = $"GUI/Labels/VBoxContainer/Organisms";
 
 
 # Called when the node enters the scene tree for the first time.
@@ -93,6 +95,13 @@ func change_level(n):
 	else:
 		back_button.hide();
 		back_button.disabled = true;
+	
+	if n == 0 or n == 3:
+		labels.hide();
+		print("hide label");
+	else:
+		labels.show();
+		print("show label")
 	
 	call_deferred("add_level", n);
 	current_level_index = n;
@@ -191,3 +200,6 @@ func _on_ost_archaeology_finished():
 
 func _on_ost_reminiscence_finished():
 	curr_ost = "";
+
+func update_organism_count(n:int):
+	org_counter.text = "organisms remaining: " + str(n);

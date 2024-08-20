@@ -3,6 +3,7 @@
 90	transition overlay
 
 88	home buttons
+87	stat labels
 86	interact hint
 
 82	water gradient
