@@ -17,9 +17,11 @@ func inProcess(_delta):
 	pass
 
 func changeParentState():
-	if actor.velocity.length_squared() == 0:
+	if actor.isAboveWater:
+		return states.Jump;
+	if actor.velocity.length() < actor.MAX_IDLE_SPEED:
 		return states.Idle
-	if actor.isBursting and not actor.isAboveWater:
+	if actor.isBursting:
 		return states.Burst
 	return null
 

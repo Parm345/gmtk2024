@@ -6,8 +6,8 @@ var isBursting = false
 func enter():
 	actor.anim.speed_scale = 0.5;
 	actor.playAnimation("swim")
-	if get_parent().prevState == states.Burst:
-		actor.useExitBurstSpeed = true
+	#if get_parent().prevState == states.Burst:
+		#actor.useExitBurstSpeed = true
 
 # Called when parent leaves the state, most likely not necessary 
 func exit():
@@ -23,6 +23,8 @@ func inProcess(_delta):
 	pass
 
 func changeParentState():
+	if actor.isAboveWater:
+		return states.Jump;
 	if actor.velocity.length_squared() > actor.MAX_IDLE_SPEED:
 		return states.Swim
 	if actor.isBursting and not actor.isAboveWater:

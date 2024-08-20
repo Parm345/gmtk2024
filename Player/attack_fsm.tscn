@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctq7wdoj4wiqp"]
+
+[ext_resource type="Script" path="res://Objects/FSM/FiniteStateMachine.gd" id="1_06pes"]
+[ext_resource type="Script" path="res://Player/AttackStates/Idle.gd" id="2_acr0l"]
+[ext_resource type="Script" path="res://Player/AttackStates/Bite.gd" id="3_2g447"]
+
+[node name="AttackFSM" type="Node2D"]
+script = ExtResource("1_06pes")
+
+[node name="Idle" type="Node2D" parent="."]
+script = ExtResource("2_acr0l")
+
+[node name="Bite" type="Node2D" parent="."]
+script = ExtResource("3_2g447")
+
+[node name="Grab" type="Node2D" parent="."]

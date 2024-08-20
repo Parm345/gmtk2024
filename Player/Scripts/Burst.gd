@@ -23,8 +23,14 @@ func inProcess(_delta):
 	pass
 
 func changeParentState():
-	if actor.burstDistance >= actor.burstDistanceAccl and actor.velocity.length() < actor.MAX_SPEED:
-		return states.Idle
+	if actor.isAboveWater:
+		return states.Jump;
+	if actor.burstDistance >= actor.burstDistanceAccl:
+		var speed:float = actor.velocity.length();
+		if speed < actor.MAX_IDLE_SPEED:
+			return states.Idle
+		elif speed < actor.MAX_SWIM_SPEED:
+			return states.Swim;
 	return null
 
 func handleInput(_event):

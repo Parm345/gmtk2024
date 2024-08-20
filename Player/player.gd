@@ -10,19 +10,21 @@ signal moved;
 @export var MAX_BURST_FORCE = 100
 @export var ACCL_DIST_RATIO = 0.75;
 @export var MAX_ACCL_DIST = 800
-@export var MAX_SPEED = 280
+@export var MAX_SWIM_SPEED = 280
 @export var MAX_BURST_SPEED = 480;
 @export var MAX_IDLE_SPEED = 8;
 @export var MAX_GRAV = 100
-@export var GRAVITY = 5
+@export var GRAVITY = 6
 @export var BITE_STRENGTH = 10
 @export var FRICTION_FACTOR_WATER = 0.98
+@export var FRICTION_FACTOR_AIR = 0.998
 @export var FRICTION_FACTOR_BURST = 0.94;
 @export var FRICTION_FACTOR_BRAKE = 0.6
 @export var MAX_LENSQ_TO_MOUSE_FOR_BRAKE = 64 #exclusive
 @export var MIN_LENSQ_TO_MOUSE_FOR_ACCL = 64 #inclusive
 @export var MIN_LENSQ_TO_MOUSE_FOR_ROTATION = 0; #inclusive
 @export var OSC_DIR_DAMPENING = 0.05
+@export var AIR_TIME_UNTIL_DAMAGE = 6;
 @export var health = 12
 
 var mouseDirection:Vector2;
@@ -52,11 +54,12 @@ var isAboveWater:bool = false
 var useExitBurstSpeed = false
 
 @onready var anim:AnimatedSprite2D = $AnimatedSprite2D;
+@onready var air_timer:Timer = $AirTimer;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$FSM.setState($FSM.states.Idle)
-	print(get_world_2d().navigation_map)
+	#print(get_world_2d().navigation_map)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -95,18 +98,17 @@ func _physics_process(_delta):
 	
 	if waterLevel != null:
 		if global_position.y < waterLevel.global_position.y:
-			isAboveWater = true 
-			$FSM.overrideState($FSM.states.Jump)
+			isAboveWater = true
 		else:
 			isAboveWater = false
 	
 	#clamp speed
 	var speed:float = velocity.length();
-	if $FSM.curState != $FSM.states.Burst:
-		if speed > MAX_SPEED:
-			velocity *= MAX_SPEED/speed;
+	if $FSM.curState != $FSM.states.Burst and $FSM.curState != $FSM.states.Jump:
+		if speed > MAX_SWIM_SPEED:
+			velocity *= MAX_SWIM_SPEED/speed;
 		#if not isAboveWater:
-			#velocity.y = clamp(velocity.y, -MAX_SPEED, MAX_SPEED)
+			#velocity.y = clamp(velocity.y, -MAX_SWIM_SPEED, MAX_SWIM_SPEED)
 		#else:
 			#velocity.y = clamp(velocity.y, -MAX_GRAV, MAX_GRAV)
 	else:
@@ -140,7 +142,6 @@ func _unhandled_input(event):
 		burstDistance = 0
 		burstDistanceAccl = min(mouseDirection.length() * ACCL_DIST_RATIO, MAX_ACCL_DIST);
 		burstDistanceTotal = mouseDirection.length();
-		print(burstDistanceTotal)
 		isBurstEnabled = false
 
 func playAnimation(animationName: String) -> void:
@@ -160,6 +161,7 @@ func _on_BurstCoolDown_timeout():
 
 func takeDamage(damageDealt):
 	health -= damageDealt
+	$AnimationPlayer.play("hurt");
 	if health <= 0:
 		$FSM.overrideState($FSM.states.Death)
 		isDead = true

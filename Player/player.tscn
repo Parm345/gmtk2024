@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bg4xrv8gigc24"]
+[gd_scene load_steps=44 format=3 uid="uid://bg4xrv8gigc24"]
 
 [ext_resource type="Script" path="res://Objects/FSM/FiniteStateMachine.gd" id="1"]
 [ext_resource type="Script" path="res://Player/player.gd" id="2"]
@@ -11,9 +11,44 @@
 [ext_resource type="Script" path="res://Player/Scripts/Burst.gd" id="5"]
 [ext_resource type="Texture2D" uid="uid://dg31srnchec3n" path="res://sprites/sheets/player_fish1_jump.png" id="5_y1sf1"]
 [ext_resource type="Script" path="res://Player/Scripts/Death.gd" id="7_405ss"]
-[ext_resource type="Script" path="res://Player/AttackStates/Idle.gd" id="8_25c8q"]
-[ext_resource type="Script" path="res://Player/AttackStates/Bite.gd" id="9_trvwc"]
 [ext_resource type="Script" path="res://Player/Jump.gd" id="12_l8dej"]
+
+[sub_resource type="Animation" id="Animation_joy53"]
+resource_name = "hurt"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.478431, 0.188235, 0.188235, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2dw52"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8r7le"]
+_data = {
+"RESET": SubResource("Animation_2dw52"),
+"hurt": SubResource("Animation_joy53")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xw0lg"]
 atlas = ExtResource("2_4gtnf")
@@ -232,6 +267,11 @@ size = Vector2(6.5, 14)
 z_index = 50
 script = ExtResource("2")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8r7le")
+}
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4vdmn")
 animation = &"jump"
@@ -262,17 +302,6 @@ script = ExtResource("12_l8dej")
 wait_time = 0.4
 one_shot = true
 
-[node name="AttackFSM" type="Node2D" parent="."]
-script = ExtResource("1")
-
-[node name="Idle" type="Node2D" parent="AttackFSM"]
-script = ExtResource("8_25c8q")
-
-[node name="Bite" type="Node2D" parent="AttackFSM"]
-script = ExtResource("9_trvwc")
-
-[node name="Grab" type="Node2D" parent="AttackFSM"]
-
 [node name="BiteBox" type="Area2D" parent="."]
 position = Vector2(16, 0)
 collision_layer = 3
@@ -286,6 +315,9 @@ shape = SubResource("RectangleShape2D_uxdxo")
 [node name="LureEquipSpot" type="Marker2D" parent="."]
 position = Vector2(21, 0)
 
+[node name="AirTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="BurstCoolDown" to="." method="_on_BurstCoolDown_timeout"]
 [connection signal="body_entered" from="BiteBox" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="BiteBox" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="AirTimer" to="FSM/Jump" method="_on_air_timer_timeout"]

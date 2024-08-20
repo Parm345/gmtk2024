@@ -126,7 +126,7 @@ func _on_lure_vision_body_exited(body: Node2D) -> void:
 	if body.is_in_group("lure") and not isDead:
 		if body.LURE_LEVEL >= PRED_LEVEL - 2 and body.LURE_LEVEL <= PRED_LEVEL + 2 and body.isActiveLure:
 			isLured = false
-			print(isLured)
+			#print(isLured)
 
 func _on_bite_box_body_entered(body: Node2D) -> void:
 	if body.is_in_group("prey") and not isDead and not isLured:
